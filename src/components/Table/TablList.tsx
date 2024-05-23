@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "../ui/badge";
 import { FaLongArrowAltRight } from "react-icons/fa";
-
+import useProblemStore from "@/zustang/ProblemStore";
 interface Problem {
   id: string;
   Title: string;
@@ -25,6 +25,24 @@ interface TableListProps {
 }
 
 const TableList: React.FC<TableListProps> = ({ problems }) => {
+  const { updateProblem } = useProblemStore();
+
+  const updateProblemState = (
+    title: string,
+    statemenet: string,
+    level: string,
+    input: string,
+    output: string,
+    constraints: string
+  ) => {
+    updateProblem("Title", title);
+    updateProblem("Statement", statemenet);
+    updateProblem("Level", level);
+    updateProblem("Input", input);
+    updateProblem("Output", output);
+    updateProblem("Contraints", constraints);
+  };
+
   return (
     <>
       <Table>
@@ -45,7 +63,19 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
             <TableRow className="text-[#EEEEEE]" key={indx}>
               <TableCell className="font-medium">Day {indx + 1}</TableCell>
               <TableCell>Completed</TableCell>
-              <TableCell className="hover:text-blue-500 cursor-pointer w-[420px]">
+              <TableCell
+                className="hover:text-blue-500 cursor-pointer w-[420px]"
+                onClick={() =>
+                  updateProblemState(
+                    prob.Title,
+                    prob.Statement,
+                    prob.Level,
+                    prob.Input,
+                    prob.Output,
+                    prob.Contraints
+                  )
+                }
+              >
                 {prob.Title}
               </TableCell>
               <TableCell>

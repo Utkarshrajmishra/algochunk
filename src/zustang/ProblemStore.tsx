@@ -1,17 +1,17 @@
 import { create } from "zustand";
 
-interface Problem{
- Title:string,
-    Statement:string,
-    Level:string,
-    Input:string,
-    Output:string,
-    Constraints:string
+interface Problem {
+  Title: string;
+  Statement: string;
+  Level: string;
+  Input: string;
+  Output: string;
+  Contraints: string;
 }
 
 interface ProblemState{
    problems:Problem,
-   updateObject: <K extends keyof Problem>(key: K, value: Problem[K]) => void;
+   updateProblem: <K extends keyof Problem>(key: K, value: Problem[K]) => void;
 }
 
 const useProblemStore = create<ProblemState>((set) => ({
@@ -21,9 +21,9 @@ const useProblemStore = create<ProblemState>((set) => ({
     Level: "",
     Input: "",
     Output: "",
-    Constraints: "",
+    Contraints: "",
   },
-  updateObject: (key, value) =>
+  updateProblem: (key, value) =>
     set((state) => ({
       problems: { ...state.problems, [key]: value },
     })),
