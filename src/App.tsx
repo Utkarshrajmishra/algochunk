@@ -1,13 +1,19 @@
-import './App.css'
-import ProblemList from './pages/ProblemList';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProblemList from "./pages/ProblemList";
+import Problem from "./pages/Problem";
 
 function App() {
-  
   return (
     <>
-     <ProblemList/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<ProblemList/>} />
+          <Route path="/problem" element={<Problem />} />
+        </Routes>
+      </Router>
     </>
   );
 }
 
-export default App
+export default App;

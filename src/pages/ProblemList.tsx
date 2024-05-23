@@ -17,7 +17,7 @@ interface Problem {
 const ProblemList = () => {
   const [problems, setProblems] = useState<Problem[]>([]);
   const [loading, setLoading] = useState(true);
-
+  console.log(loading);
   useEffect(() => {
     async function getProblems() {
       try {

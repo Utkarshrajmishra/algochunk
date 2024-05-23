@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import useProblemStore from "@/zustang/ProblemStore";
@@ -26,7 +27,7 @@ interface TableListProps {
 
 const TableList: React.FC<TableListProps> = ({ problems }) => {
   const { updateProblem } = useProblemStore();
-
+    const navigate=useNavigate()
   const updateProblemState = (
     title: string,
     statemenet: string,
@@ -41,6 +42,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     updateProblem("Input", input);
     updateProblem("Output", output);
     updateProblem("Contraints", constraints);
+    navigate("/problem");
   };
 
   return (
