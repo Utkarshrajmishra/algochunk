@@ -1,12 +1,11 @@
 import './App.css'
-import { Button } from './components/ui/button';
-import TableList from './components/Table/TablList';
+import ProblemList from './pages/ProblemList';
+
 function App() {
   
   return (
     <>
-      <TableList/>
-      <Button>HY</Button>
+     <ProblemList/>
     </>
   );
 }
