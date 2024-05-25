@@ -14,11 +14,12 @@ interface LanguageDropDownProps{
     handleLanguageChange:(setLang:any)=>void;
 }
 
-const LanguageDropDown=()=>{
+const LanguageDropDown:React.FC<LanguageDropDownProps>=({handleLanguageChange})=>{
     const [language,setLanguage]=useState(options[0])
 
     const handleChange=(selectLang:any)=>{
-        setLanguage(language);
+        setLanguage(selectLang);
+        handleLanguageChange(selectLang); 
     }
 
     return(
