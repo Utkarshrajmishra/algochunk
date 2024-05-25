@@ -1,13 +1,28 @@
 import { Editor } from "@monaco-editor/react";
-const EditorComp = () => {
+
+interface EditorCompProps {
+  language: string;
+  handleCodeChange: (codeType: string, newCode: string) => void;
+}
+
+const EditorComp: React.FC<EditorCompProps> = ({
+  language = "javascript",
+  handleCodeChange,
+}) => {
+
+  const handleChange=(code:string | undefined)=>{
+     code && handleCodeChange("code", code);
+  }
+
   return (
     <>
       <Editor
         height="89vh"
         defaultLanguage="javascript"
-        defaultValue="// some comment"
+        language={language}
         theme="vs-dark"
-       
+        defaultValue="//Your Code Here"
+        onChange={handleChange}
       />
     </>
   );

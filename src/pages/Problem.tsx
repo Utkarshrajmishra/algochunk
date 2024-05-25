@@ -11,6 +11,7 @@ const Problem = () => {
   const [LangId, setLangId] = useState(63);
   const [language, setLanguage] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [code,setCode]=useState('')
 
   const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
@@ -29,7 +30,7 @@ const Problem = () => {
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
         <div className="w-full p-2">
-          <div className=" flex justify-between">
+          <div className=" w-full flex justify-between">
             <Button className="bg-green-600 text-white hover:bg-green-500 w-[135px]">
               {processing ? "Processing.." : "Compile & Excute"}
             </Button>
