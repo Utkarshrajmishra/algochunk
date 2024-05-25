@@ -2,7 +2,8 @@ import ProblemStatement from "@/components/ViewProblem/ViewProblem";
 import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LanguageDropDown from "@/components/dropdown/languages";
 
 const Problem = () => {
   const [input, setInput] = useState("");
@@ -11,12 +12,14 @@ const Problem = () => {
   const [language, setLanguage] = useState("");
   const [processing, setProcessing] = useState(false);
 
-  const handleChangeLang=(newLang: any)=>{
+  const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
     setLanguage(newLang.value);
-  }
+  };
 
- 
+  useEffect(() => {
+    console.log(input);
+  }, [input]);
 
   return (
     <>
@@ -26,10 +29,12 @@ const Problem = () => {
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
         <div className="w-full p-2">
-          <Button className="bg-green-600 text-white hover:bg-green-500 w-[135px]">
-            {processing ? 
-            "Processing.." : "Compile & Excute"}
-          </Button>
+          <div className=" flex justify-between">
+            <Button className="bg-green-600 text-white hover:bg-green-500 w-[135px]">
+              {processing ? "Processing.." : "Compile & Excute"}
+            </Button>
+            <LanguageDropDown handleLanguageChange={handleChangeLang} />
+          </div>
           <div className="mt-2">
             <EditorComp />
           </div>

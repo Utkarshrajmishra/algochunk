@@ -1,6 +1,6 @@
 import { Languages } from "@/constants/languages";
 import { useState } from "react";
-import Select from "react-select"
+import Select from "react-select";
 
 const options = Languages.map((lang) => ({
   id: lang.id,
@@ -9,28 +9,30 @@ const options = Languages.map((lang) => ({
   value: lang.value,
 }));
 
-
-interface LanguageDropDownProps{
-    handleLanguageChange:(setLang:any)=>void;
+interface LanguageDropDownProps {
+  handleLanguageChange: (setLang: any) => void;
 }
 
-const LanguageDropDown:React.FC<LanguageDropDownProps>=({handleLanguageChange})=>{
-    const [language,setLanguage]=useState(options[0])
+const LanguageDropDown: React.FC<LanguageDropDownProps> = ({
+  handleLanguageChange,
+}) => {
+  const [language, setLanguage] = useState(options[0]);
 
-    const handleChange=(selectLang:any)=>{
-        setLanguage(selectLang);
-        handleLanguageChange(selectLang); 
-    }
+  const handleChange = (selectLang: any) => {
+    setLanguage(selectLang);
+    handleLanguageChange(selectLang);
+  };
 
-    return(
-        <>
-            <Select
-                onChange={handleChange}
-                value={language}
-                options={options}
-            />
-        </>
-    )
-}
+  return (
+    <>
+      <Select
+        
+        onChange={handleChange}
+        value={language}
+        options={options}
+      />
+    </>
+  );
+};
 
 export default LanguageDropDown;
