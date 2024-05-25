@@ -18,9 +18,13 @@ const Problem = () => {
     setLanguage(newLang.value);
   };
 
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
+ 
+  const handleCodeChange=(codeType:string, code:string)=>{
+    if(codeType=='code')
+      setCode(code);
+  }
+
+
 
   return (
     <>
@@ -37,7 +41,7 @@ const Problem = () => {
             <LanguageDropDown handleLanguageChange={handleChangeLang} />
           </div>
           <div className="mt-2">
-            <EditorComp />
+            <EditorComp language={language} handleCodeChange={handleCodeChange}/>
           </div>
         </div>
       </div>
