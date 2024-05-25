@@ -3,7 +3,12 @@ import EditorInput from "./EditorInput";
 import EditorOutput from "../Output/EditorOutput";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const Input = () => {
+interface EditorInputProps{
+  onInputChange:(value:string)=>void
+  output:string
+}
+
+const Input: React.FC<EditorInputProps> = ({ onInputChange, output }) => {
   return (
     <Tabs defaultValue="input" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -12,12 +17,12 @@ const Input = () => {
       </TabsList>
       <TabsContent value="input">
         <Card className="h-[163px] ">
-          <EditorInput />
+          <EditorInput onChange={onInputChange} />
         </Card>
       </TabsContent>
       <TabsContent value="output">
         <Card className="h-[163px]">
-          <EditorOutput />
+          <EditorOutput  Output={output}/>
         </Card>
       </TabsContent>
     </Tabs>
