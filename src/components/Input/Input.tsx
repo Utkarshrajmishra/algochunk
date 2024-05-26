@@ -16,7 +16,7 @@ const Input: React.FC<EditorInputProps> = ({
 }) => {
   return (
     <Tabs defaultValue="output" className="w-[400px] px-3">
-      <TabsList className="grid w-full grid-cols-2 h-[40px] bg-zinc-200">
+      <TabsList className="grid w-full grid-cols-2 h-[40px] bg-zinc-300">
         <TabsTrigger value="output">Ouput</TabsTrigger>
         <TabsTrigger value="input">Input</TabsTrigger>
       </TabsList>

@@ -1,11 +1,10 @@
-import ProblemStatement from "@/components/ViewProblem/ViewProblem";
+import ProblemStatement from "@/components/Problem/ProblemStatement";
 import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
-import logo from "./logo.png"
 
 const Problem = () => {
   const [input, setInput] = useState("");
@@ -107,7 +106,7 @@ const Problem = () => {
 
         <div className="flex gap-2">
           <Button
-            className="bg-green-600 text-white hover:bg-green-500 w-[100px] "
+            className="bg-green-500 h-fit text-white  w-[100px] shadow-xl hover:bg-green-500 hover:shadow-green-500"
             onClick={handleCompile}
           >
             {processing ? "Processing.." : "Run"}
@@ -129,7 +128,6 @@ const Problem = () => {
           </div>
         </div>
       </div>
-    
     </>
   );
 };
