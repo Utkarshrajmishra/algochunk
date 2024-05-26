@@ -17,7 +17,8 @@ const EditorComp: React.FC<EditorCompProps> = ({
   return (
     <>
       <Editor
-        height="89vh"
+        height="88vh"
+        width="full"
         defaultLanguage="javascript"
         language={language}
         theme="vs-dark"

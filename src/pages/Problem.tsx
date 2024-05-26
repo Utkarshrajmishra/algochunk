@@ -2,8 +2,10 @@ import ProblemStatement from "@/components/ViewProblem/ViewProblem";
 import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
+import axios from "axios";
+import logo from "./logo.png"
 
 const Problem = () => {
   const [input, setInput] = useState("");
@@ -11,40 +13,123 @@ const Problem = () => {
   const [LangId, setLangId] = useState(63);
   const [language, setLanguage] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [code,setCode]=useState('')
+  const [code, setCode] = useState<any>();
 
   const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
     setLanguage(newLang.value);
   };
 
- 
-  const handleCodeChange=(codeType:string, code:string)=>{
-    if(codeType=='code')
-      setCode(code);
-  }
+  const handleCodeChange = (codeType: string, code: string) => {
+    if (codeType == "code") setCode(code);
+  };
 
+  const handleCompile = () => {
+    setProcessing(true);
+    const Data = {
+      language_id: LangId,
+      source_code: btoa(code),
+      stdin: btoa(input),
+    };
 
+    const options = {
+      method: "POST",
+      url: import.meta.env.VITE_JUDGE_URL,
+      params: { base64_encoded: "true", fields: "*" },
+      headers: {
+        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "X-RapidAPI-Host": import.meta.env.VITE_JUDGE_HOST,
+        "X-RapidAPI-Key": import.meta.env.VITE_JUDGE_KEY,
+      },
+      data: Data,
+    };
+
+    axios
+      .request(options)
+      .then((res) => {
+        const token = res.data.token;
+        checkStatus(token);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        // get error status
+        let status = err.response.status;
+        //console.log("status", status);
+        if (status === 429) {
+          alert("Servers are busy, please try again later!");
+        }
+        return setProcessing(false);
+      });
+  };
+
+  const checkStatus = async (token: any) => {
+    console.log(import.meta.env.VITE_API_URL);
+    const options = {
+      method: "GET",
+      url: import.meta.env.VITE_JUDGE_URL + "/" + token,
+      params: { base64_encoded: "true", fields: "*" },
+      headers: {
+        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "X-RapidAPI-Host": import.meta.env.VITE_JUDGE_HOST,
+        "X-RapidAPI-Key": import.meta.env.VITE_JUDGE_KEY,
+      },
+    };
+    try {
+      let response = await axios.request(options);
+      let statusId = response.data.status?.id;
+
+      // Processed - we have a result
+      if (statusId === 1 || statusId === 2) {
+        // still processing
+        setTimeout(() => {
+          checkStatus(token);
+        }, 2000);
+        return;
+      } else {
+        setProcessing(false);
+        setOutput(response.data);
+        //console.log("response.data", response.data);
+        return;
+      }
+    } catch (err) {
+      console.log("err", err);
+      setProcessing(false);
+    }
+  };
 
   return (
     <>
-      <div className="flex">
-        <div className="flex flex-col gap-2 p-2 ">
+      <div className="flex justify-between w-full px-3 py-2">
+        <img src="./logo.png" width={40} height={40} />
+
+        <div className="flex gap-2">
+          <Button
+            className="bg-green-600 text-white hover:bg-green-500 w-[100px] "
+            onClick={handleCompile}
+          >
+            {processing ? "Processing.." : "Run"}
+          </Button>
+          <LanguageDropDown handleLanguageChange={handleChangeLang} />
+        </div>
+      </div>
+      <div className="flex px-3 pb-1  w-full">
+        <div className="flex flex-col gap-2 ">
           <ProblemStatement />
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
-        <div className="w-full p-2">
-          <div className=" w-full flex justify-between">
-            <Button className="bg-green-600 text-white hover:bg-green-500 w-[135px]">
-              {processing ? "Processing.." : "Compile & Excute"}
-            </Button>
-            <LanguageDropDown handleLanguageChange={handleChangeLang} />
-          </div>
+        <div className="w-full p-1">
           <div className="mt-2">
-            <EditorComp language={language} handleCodeChange={handleCodeChange}/>
+            <EditorComp
+              language={language}
+              handleCodeChange={handleCodeChange}
+            />
           </div>
         </div>
       </div>
+    
     </>
   );
 };

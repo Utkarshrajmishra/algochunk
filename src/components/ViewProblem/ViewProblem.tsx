@@ -1,16 +1,17 @@
 import useProblemStore from "@/zustang/ProblemStore";
-import { Badge } from "../ui/badge";
 const ProblemStatement = () => {
   const { problems } = useProblemStore();
 
-
   return (
     <>
-      <div className="w-[400px] h-[420px] overflow-scroll text-[#ced4da] bg-[#27272A] p-5 rounded-lg">
-        <div className="w-full text-right
-        "><Badge className="bg-green-700 text-white">{problems.Level}</Badge></div>
-        <h1 className="text-white text-xl font-bold">{problems.Title}</h1>
-        <h1 className="mt-2 text-m tracking-wide">{problems.Statement}</h1>
+      <div className="w-[400px] h-[380px] overflow-scroll p-3 text-sm rounded-lg text-zinc-800">
+        <div className="flex justify-between">
+          <h1 className="font-bold text-xl">{problems.Title}</h1>
+          <div className="bg-green-600 text-white py-1 px-2 rounded-lg font-semibold tex-sm ">
+            {problems.Level}
+          </div>
+        </div>
+        <h1 className="mt-2  tracking-wider">{problems.Statement}</h1>
         <h1 className="font-bold mt-3">Input:</h1>
         <code>{problems.Input}</code>
         <h1 className="font-bold mt-3">Output:</h1>

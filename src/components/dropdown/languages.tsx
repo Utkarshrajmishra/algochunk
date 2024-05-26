@@ -1,7 +1,7 @@
 import { Languages } from "@/constants/languages";
 import { useState } from "react";
 import Select from "react-select";
-
+import { Styles } from "@/constants/styles";
 const options = Languages.map((lang) => ({
   id: lang.id,
   name: lang.name,
@@ -26,7 +26,7 @@ const LanguageDropDown: React.FC<LanguageDropDownProps> = ({
   return (
     <>
       <Select
-        
+        styles={Styles}
         onChange={handleChange}
         value={language}
         options={options}

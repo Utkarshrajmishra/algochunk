@@ -13,7 +13,7 @@ const EditorInput: React.FC<EditorInputProps> = ({ onChange, InputValue="" }) =>
 
   return (
     <Textarea
-      className="w-full h-full bg-[#27272A]"
+      className="w-full h-full bg-[#121a30] outline-none text-white rounded-lg"
       placeholder="Custom Input"
       onChange={handleChange}
       value={InputValue}
