@@ -9,10 +9,9 @@ const EditorComp: React.FC<EditorCompProps> = ({
   language = "javascript",
   handleCodeChange,
 }) => {
-
-  const handleChange=(code:string | undefined)=>{
-     code && handleCodeChange("code", code);
-  }
+  const handleChange = (code: string | undefined) => {
+    code && handleCodeChange("code", code);
+  };
 
   return (
     <>
@@ -22,7 +21,6 @@ const EditorComp: React.FC<EditorCompProps> = ({
         defaultLanguage="javascript"
         language={language}
         theme="vs-dark"
-        defaultValue="//Your Code Here"
         onChange={handleChange}
       />
     </>

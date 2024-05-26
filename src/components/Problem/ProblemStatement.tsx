@@ -3,12 +3,14 @@ import TimeCounter from "../timer/timer";
 const ProblemStatement = () => {
   const { problems } = useProblemStore();
 
-  const paragraphs = problems.Contraints
-    .split("\n")
-    .map((line, index) => <p key={index}>{line}</p>);
+    const paragraphs = problems.Contraints.split('\n').map((paragraph, index) => (
+    // Map each part to a <p> element with a unique key
+    <p key={index}>{paragraph}</p>
+  ));
+  
   return (
     <>
-      <div className="w-[400px] h-[380px] overflow-scroll p-3 text-sm rounded-lg text-zinc-800">
+      <div className="w-full h-full overflow-scroll p-3 text-sm rounded-lg text-zinc-800">
         <div>
           <TimeCounter />
           <div className="flex justify-between">

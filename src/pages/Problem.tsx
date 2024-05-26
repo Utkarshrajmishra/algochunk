@@ -1,4 +1,4 @@
-import ProblemStatement from "@/components/Problem/ProblemStatement";
+import ProblemSwitch from "@/components/Problem/ProblemSwitch";
 import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
@@ -106,17 +106,17 @@ const Problem = () => {
 
         <div className="flex gap-2">
           <Button
-            className="bg-green-500 h-fit text-white  w-[100px] shadow-xl hover:bg-green-500 hover:shadow-green-500"
+            className="bg-green-500  shadow-green-400 font-bold text-white  w-fit h-10 shadow-xl hover:bg-green-500  hover:shadow-green-500"
             onClick={handleCompile}
           >
-            {processing ? "Processing.." : "Run"}
+            {processing ? "Processing.." : "Compile and Excute"}
           </Button>
           <LanguageDropDown handleLanguageChange={handleChangeLang} />
         </div>
       </div>
       <div className="flex px-3 pb-1  w-full">
         <div className="flex flex-col gap-2 ">
-          <ProblemStatement />
+          <ProblemSwitch/>
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
         <div className="w-full p-1">
