@@ -6,6 +6,9 @@ import { useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
 
+import { RiSave2Line } from "react-icons/ri";
+import { TbReload } from "react-icons/tb";
+
 const Problem = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -99,12 +102,39 @@ const Problem = () => {
     }
   };
 
+  const handleGeminiRequest=()=>{
+      let req="";
+    if(code){
+        req="Please help me with"+"Here is the code I am trying"+code;
+    }
+    else{
+      req="Please help with problem";
+    }
+    
+  }
+
   return (
     <>
       <div className="flex justify-between w-full px-3 py-2">
-        <img src="./logo.png" width={40} height={40} />
+        <div className="flex w-[400px] justify-between pr-3">
+          <img
+            src="./logo.png"
+            width={40}
+            height={40}
+            className="cursor-pointer"
+          />
+          <div>
+            <div className="flex h-full items-center gap-3">
+              <RiSave2Line fontSize="1.3em" className="cursor-pointer" />
+              <TbReload fontSize="1.3em" className="cursor-pointer" />
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-4 justify-between">
+          <Button onClick={handleGeminiRequest} className=" shadow-xl shadow-blue-300 hover:shadow-blue-400 font-bold bg-gradient-to-r from-cyan-500 to-blue-500">
+            Ask Gemini
+          </Button>
 
-        <div className="flex gap-2">
           <Button
             className="bg-green-500  shadow-green-400 font-bold text-white  w-fit h-10 shadow-xl hover:bg-green-500  hover:shadow-green-500"
             onClick={handleCompile}
@@ -114,9 +144,9 @@ const Problem = () => {
           <LanguageDropDown handleLanguageChange={handleChangeLang} />
         </div>
       </div>
-      <div className="flex px-3 pb-1  w-full">
+      <div className="flex px-3 pb-1 w-full">
         <div className="flex flex-col gap-2 ">
-          <ProblemSwitch/>
+          <ProblemSwitch />
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
         <div className="w-full p-1">

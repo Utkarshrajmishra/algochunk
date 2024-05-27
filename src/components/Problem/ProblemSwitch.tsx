@@ -12,7 +12,8 @@ const ProblemSwitch = () => {
     <Tabs defaultValue="output" className="w-[400px] px-3">
       <TabsList className="grid w-full grid-cols-2 h-[40px] bg-zinc-200">
         <TabsTrigger value="output">Problem</TabsTrigger>
-        <TabsTrigger value="input">Solution and Resource</TabsTrigger>
+        <TabsTrigger value="input">Solution</TabsTrigger>
+        
       </TabsList>
       <TabsContent value="output">
         <Card className="h-[330px]">

@@ -40,7 +40,7 @@ const TimeCounter = () => {
 
   return (
     <div className="flex gap-1">
-      <div onClick={() => setStart(!start)} className="text-zinc-700">
+      <div onClick={() => setStart(!start)} className="text-zinc-700 cursor-pointer">
         <IoMdStopwatch fontSize="1.5em" />
       </div>
       {start ? (
