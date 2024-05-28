@@ -1,4 +1,4 @@
-import useProblemStore from "@/zustang/ProblemStore";
+import useProblemStore from "@/zustang/useProblemStore";
 import TimeCounter from "../timer/timer";
 const ProblemStatement = () => {
   const { problems } = useProblemStore();

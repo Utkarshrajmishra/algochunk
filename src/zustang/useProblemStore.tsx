@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import {persist} from "zustand/middleware"
+
 interface Problem {
   Title: string;
   Statement: string;
@@ -9,9 +9,9 @@ interface Problem {
   Contraints: string;
 }
 
-interface ProblemState{
-   problems:Problem,
-   updateProblem: <K extends keyof Problem>(key: K, value: Problem[K]) => void;
+interface ProblemState {
+  problems: Problem;
+  updateProblem: <K extends keyof Problem>(key: K, value: Problem[K]) => void;
 }
 
 const useProblemStore = create<ProblemState>((set) => ({

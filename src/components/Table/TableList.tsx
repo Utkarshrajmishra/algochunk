@@ -1,7 +1,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
+
   TableCell,
   TableHead,
   TableHeader,
@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import useProblemStore from "@/zustang/ProblemStore";
+import useProblemStore from "@/zustang/useProblemStore";
 interface Problem {
   id: string;
   Title: string;
@@ -48,7 +48,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
   return (
     <>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Day</TableHead>
@@ -60,9 +60,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
             <TableHead className="text-right"> Solve</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="text-zinc-800 ">
           {problems?.map((prob, indx) => (
-            <TableRow className="text-[#EEEEEE]" key={indx}>
+            <TableRow key={indx}>
               <TableCell className="font-medium">Day {indx + 1}</TableCell>
               <TableCell>Completed</TableCell>
               <TableCell
@@ -84,8 +84,8 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                 <p
                   className={
                     prob.Level == "Easy"
-                      ? "bg-green-700 p-1 px-2 w-fit rounded-md"
-                      : "bg-yellow-700 p-1 px-2 w-fit rounded-md"
+                      ? "bg-green-500 text-white p-1 font-bold px-2 w-fit rounded-md"
+                      : "bg-yellow-500 p-1 text-white font-bold px-2 w-fit rounded-md"
                   }
                 >
                   {prob.Level}
@@ -93,7 +93,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
               </TableCell>
               <TableCell>Coming Soon</TableCell>
               <TableCell>
-                <Badge>Hash Map</Badge>
+                <Badge className="bg-slate-400">Hash Map</Badge>
               </TableCell>
               <TableCell className="align-right">
                 <FaLongArrowAltRight color="#318CE7" fontSize="1.5em" />

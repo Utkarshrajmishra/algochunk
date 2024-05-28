@@ -11,6 +11,7 @@ import { RiSave2Line } from "react-icons/ri";
 import { TbReload } from "react-icons/tb";
 
 const Problem = () => {
+
  
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -23,6 +24,8 @@ const Problem = () => {
     setLangId(newLang.id);
     setLanguage(newLang.value);
   };
+
+  console.log(typeof language)
 
   const handleCodeChange = (codeType: string, code: string) => {
     if (codeType == "code") setCode(code);
@@ -119,7 +122,7 @@ const Problem = () => {
           <div>
             <div className="flex h-full items-center gap-3">
               <RiSave2Line fontSize="1.3em" className="cursor-pointer" />
-              <TbReload fontSize="1.3em" className="cursor-pointer" />
+              <TbReload fontSize="1.3em" className="cursor-pointer" onClick={()=>setCode("")}/>
             </div>
           </div>
         </div>
