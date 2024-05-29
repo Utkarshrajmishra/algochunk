@@ -47,7 +47,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
 
   return (
     <>
-      <Table>
+      <Table >
         
         <TableHeader>
           <TableRow>
