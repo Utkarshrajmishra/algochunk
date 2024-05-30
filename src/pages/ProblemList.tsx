@@ -13,12 +13,14 @@ const ProblemList = () => {
 
   return (
     <>
-      <div className="p-3">
-        <div className="outline outline-[1px] outline-zinc-200 rounded-lg ">
-          <TableList problems={problems} />
-        </div>
-       
+     
+        <div className="lg:px-20 md:px-20  py-3 px-3">
+          <div>
+            <TableList problems={problems} />
+          </div>
+        
       </div>
+      
     </>
   );
 };
