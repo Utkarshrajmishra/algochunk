@@ -1,4 +1,23 @@
 const Home = () => {
+
+  const topics = [
+    "Arrays",
+    "Strings",
+    "Dyamic Programming",
+    "Graphs",
+    "Hashing",
+    "Trees",
+    "Sliding Window",
+    "Backtracking",
+    "useEffect",
+    "useContext",
+    "useState",
+    "React Core Concepts",
+    "Custom Hooks",
+    "Memorization",
+    "and many more",
+  ];
+
   return (
     <>
       <div className="mx-auto h-full w-full overflow-hidden">
@@ -43,7 +62,7 @@ const Home = () => {
           </section>
         </main>
       </div>
-      <section className="flex justify-center items-center my-10 lg:my-20">
+      <section className="flex justify-center items-center my-10 ">
         <div className=" text-zinc-700 leading-relaxed tracking-wide w-[90%] md:w-[80%] text-center ">
           <div className=" flex flex-col gap-2">
             <p className="font-bold text-2xl text-zinc-800">
@@ -56,7 +75,7 @@ const Home = () => {
             </p>
           </div>
           <div className="my-10">
-            <div className="flex flex-row gap-5 flex-wrap">
+            <div className="flex flex-row gap-3 md:justify-between flex-wrap">
               <div className="w-[350px] flex flex-col gap-2 outline outline-[1px] outline-blue-200 rounded-xl p-5 text-left bg-blue-50">
                 <p className="text-xl  text-zinc-800 font-semibold">
                   Boilerplate
@@ -95,7 +114,34 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="h-[100vh] bg-gradient-to-b from-slate-50 via-slate-50 to-slate-300"></section>
+      <section className=" h-fit bg-[#f9fafa]  text-zinc-700 leading-relaxed tracking-wide jusitfy-center ">
+        <div className="w-[90%] py-10 md:w-[70%] flex h-full items-center">
+          <div className="md:w-[80%] w-[100%] flex flex-col gap-5 px-10">
+            <div className="flex flex-col gap-4">
+              <p className="text-2xl text-zinc-800 font-semibold">
+                Practice Algorithmic & Frontend Problems
+              </p>
+              <p>
+                Algorithmic questions are everywhere and even we don't like it.
+                But since companies are asking, we have a long list of questions
+                that are popularly asked in tech interviews.All the questions
+                are real-world and are based on user experiences. The concepts
+                that are being tested are
+              </p>
+              <div className="grid-cols-2 md:grid-cols-3 grid gap-5 ">
+                {topics.map((items) => (
+                  <p
+                    key={items}
+                    className="text-sm md:text-base outline w-fit p-1 outline-[1px] rounded-lg"
+                  >
+                    ✅ {items}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
