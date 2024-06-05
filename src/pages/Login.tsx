@@ -1,12 +1,21 @@
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { authRef, AuthProvider } from "@/Firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import useUserDataStore from "@/zustang/useUserData";
+
 const Login = () => {
+  const { setIsLoggedIn, setUserData } = useUserDataStore();
+
   const handleLogin = async () => {
     await signInWithPopup(authRef, AuthProvider)
       .then((res) => {
-        const credential = GoogleAuthProvider.credentialFromResult(res);
-        const user = res.user;
+        setIsLoggedIn();
+
+        setUserData({
+          userEmail: res.user.email || "",
+          userName: res.user.displayName || "",
+          userImageUrl: res.user.photoURL || ""
+        });
       })
       .catch((error) => {
         console.log(error.errorMessage);
