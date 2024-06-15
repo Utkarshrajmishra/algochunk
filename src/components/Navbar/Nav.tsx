@@ -7,29 +7,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-slate-50 border-gray-200 dark:bg-gray-900 shadow-md">
+    <nav className="shadow-md">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
-        <a
-         
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
-          <img
-            src="./logo.png"
-            className="h-8"
-            alt="AlgoChunk Logo"
-          />
-          <span className="self-center text-zinc-800 text-2xl font-semibold whitespace-nowrap dark:text-white">
+        <a className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="./logo.png" className="h-8" alt="AlgoChunk Logo" />
+          <span className="self-center text-zinc-200 text-2xl font-semibold whitespace-nowrap dark:text-white">
             Algochunk
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            className="text-white  bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white  bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-4 py-2 shadow-lg shadow-blue-400 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Login
           </button>
-          
+
           <button
             onClick={handleToggle}
             type="button"
@@ -61,7 +54,7 @@ const Navbar = () => {
           }`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  text-zinc-800">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  text-zinc-200">
             <li>
               <a
                 href="#"
@@ -74,25 +67,33 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 px-3 md:p-0 rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
-                About
+                DSA Problems
               </a>
             </li>
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 px-3 md:p-0  rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
-                Services
+                Frontend Problems
               </a>
             </li>
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 px-3 md:p-0  rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
-                Contact
+                Playground
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 md:p-0  rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                Blogs
               </a>
             </li>
           </ul>
