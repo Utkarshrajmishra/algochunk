@@ -7,14 +7,19 @@ import ProblemList from "./pages/ProblemList";
 
 function App() {
   return (
-    <>
-     <BrowserRouter>
-     <Routes>
-      <Route index element={<Login/>} />
-      <Route path="/problem-list"  element={<ProtectedRoute><ProblemList/></ProtectedRoute>}/>
-     </Routes>
-     </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route
+          path="/problem-list"
+          element={
+            <ProtectedRoute>
+              <ProblemList />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
