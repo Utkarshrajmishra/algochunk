@@ -13,14 +13,14 @@ const ProblemList = () => {
 
   return (
     <>
-     
-        <div className="lg:px-20 md:px-20  py-3 px-3">
+      <section className=" bg-neutral-900  h-[100vh] ">
+        
+        <div className="lg:px-20 md:px-20py-3 px-3">
           <div>
             <TableList problems={problems} />
           </div>
-        
-      </div>
-      
+        </div>
+      </section>
     </>
   );
 };

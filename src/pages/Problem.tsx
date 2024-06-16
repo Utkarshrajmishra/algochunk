@@ -111,7 +111,7 @@ const Problem = () => {
   return (
     <>
       
-      <div className="flex justify-between w-full px-3 py-2">
+      <div className="flex justify-between w-full px-3 py-2 bg-neutral-900">
         <div className="flex w-[400px] justify-between pr-3">
           <img
             src="./logo.png"
@@ -129,7 +129,7 @@ const Problem = () => {
         <div className="flex gap-4 justify-between">
           <DialogComp code={code} language={language} />
           <Button
-            className="bg-green-500  shadow-green-400 font-bold text-white  w-fit h-10 shadow-xl hover:bg-green-500  hover:shadow-green-500"
+            className="bg-green-500  shadow-green-600 font-bold text-white  w-fit h-10 shadow-lg hover:bg-green-500  hover:shadow-green-500"
             onClick={handleCompile}
           >
             {processing ? "Processing.." : "Compile and Excute"}
@@ -137,7 +137,7 @@ const Problem = () => {
           <LanguageDropDown handleLanguageChange={handleChangeLang} />
         </div>
       </div>
-      <div className="flex px-3 pb-1 w-full">
+      <div className="flex px-3 pb-1 w-full bg-neutral-900">
         <div className="flex flex-col gap-2 ">
           <ProblemSwitch />
           <Input onInputChange={setInput} input={input} output={output} />

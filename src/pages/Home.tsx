@@ -45,7 +45,7 @@ const Home = () => {
               <span className="text-blue-500 font-semibold">Playground</span> to
               generate code and practice.
             </p>
-            <section className="flex gap-3">
+            <section className="flex gap-3 w-full justify-center lg:justify-start">
               <button className="p-3 text-sm bg-blue-500 text-white font-semibold rounded-lg hover:bg-white hover:outline hover:outline-[1px] hover:outline-blue-500 hover:text-zinc-800 ">
                 DSA Problems
               </button>

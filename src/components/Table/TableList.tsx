@@ -28,10 +28,9 @@ interface TableListProps {
 }
 
 const TableList: React.FC<TableListProps> = ({ problems }) => {
-  const [filter,setFilter]=useState('')
-  const [filter_level,setFilterLevel]=useState('')
+  const [filter, setFilter] = useState("");
   const { updateProblem } = useProblemStore();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const updateProblemState = (
     title: string,
     statemenet: string,
@@ -46,7 +45,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     updateProblem("Input", input);
     updateProblem("Output", output);
     updateProblem("Contraints", constraints);
-    navigate("/problem");
+    // navigate("/problem");
   };
 
   return (
@@ -59,39 +58,40 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
               placeholder="Search problems"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="text-zinc-800"
+              className="text-zinc-200 bg-zinc-900"
             />
           </div>
-      
         </div>
         <div className="outline outline-[1px] outline-zinc-200 rounded-lg ">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Day</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Problems</TableHead>
-                <TableHead> Difficulty</TableHead>
-                <TableHead>Solution</TableHead>
-                <TableHead> Tags</TableHead>
-                <TableHead className="text-right"> Solve</TableHead>
+              <TableRow className="hover:bg-neutral-800">
+                <TableHead className="w-[100px] text-zinc-200">Day</TableHead>
+                <TableHead className=" text-zinc-200">Status</TableHead>
+                <TableHead className=" text-zinc-200">Problems</TableHead>
+                <TableHead className=" text-zinc-200">Difficulty</TableHead>
+                <TableHead className=" text-zinc-200">Solution</TableHead>
+                <TableHead className=" text-zinc-200">Tags</TableHead>
+                <TableHead className="text-right text-zinc-200">
+                  Solve
+                </TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody className="text-zinc-800 ">
+            <TableBody className="text-zinc-200">
               {problems
                 ?.filter((prob) => {
-                  return filter == ""
+                  return filter === ""
                     ? prob
                     : prob.Title.toLowerCase().includes(filter.toLowerCase());
                 })
                 .map((prob, indx) => (
-                  <TableRow key={indx}>
+                  <TableRow key={indx} className="hover:bg-neutral-800">
                     <TableCell className="font-medium">
                       Day {indx + 1}
                     </TableCell>
                     <TableCell>Completed</TableCell>
                     <TableCell
-                      className="hover:text-blue-500 cursor-pointer w-[420px]"
+                      className=" cursor-pointer w-[420px]"
                       onClick={() =>
                         updateProblemState(
                           prob.Title,
@@ -108,7 +108,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                     <TableCell>
                       <p
                         className={
-                          prob.Level == "Easy"
+                          prob.Level === "Easy"
                             ? "bg-green-500 text-white p-1 font-bold px-2 w-fit rounded-md"
                             : "bg-yellow-500 p-1 text-white font-bold px-2 w-fit rounded-md"
                         }
@@ -118,7 +118,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                     </TableCell>
                     <TableCell>Coming Soon</TableCell>
                     <TableCell>
-                      <Badge className="bg-slate-400">Hash Map</Badge>
+                      <Badge className="bg-slate-800">Hash Map</Badge>
                     </TableCell>
                     <TableCell className="align-right">
                       <FaLongArrowAltRight color="#318CE7" fontSize="1.5em" />

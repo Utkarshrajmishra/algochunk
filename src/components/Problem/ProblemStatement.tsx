@@ -10,7 +10,7 @@ const ProblemStatement = () => {
   
   return (
     <>
-      <div className="w-full h-full overflow-scroll p-3 text-sm rounded-lg text-zinc-800">
+      <div className="w-full h-full overflow-scroll p-3 text-sm rounded-lg text-zinc-200 bg-neutral-800">
         <div>
           <TimeCounter />
           <div className="flex justify-between">
@@ -22,11 +22,11 @@ const ProblemStatement = () => {
         </div>
         <h1 className="mt-2  tracking-wider">{problems.Statement}</h1>
         <h1 className="font-bold my-3">Input:</h1>
-        <code className="bg-neutral-200 p-2 rounded-sm">{problems.Input}</code>
+        <code className=" p-2 rounded-sm bg-neutral-700">{problems.Input}</code>
         <h1 className="font-bold my-3">Output:</h1>
-        <code className="bg-neutral-200 p-2 rounded-sm">{problems.Output}</code>
+        <code className="bg-neutral-700 p-2 rounded-sm">{problems.Output}</code>
         <h1 className="font-bold my-3">Contraints:</h1>
-        <div className="tracking-wide text-m bg-neutral-200 p-2 rounded-sm">
+        <div className="tracking-wide text-m bg-neutral-700 p-2 rounded-sm">
           {paragraphs}
         </div>
       </div>
