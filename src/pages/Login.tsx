@@ -1,12 +1,24 @@
-import { GoogleLoginButton } from "react-social-login-buttons";
+import styled from "styled-components";
+import { GoogleLoginButton as OriginalGoogleLoginButton } from "react-social-login-buttons";
 import { authRef, AuthProvider } from "@/Firebase";
 import { signInWithPopup } from "firebase/auth";
 import useUserDataStore from "@/zustang/useUserData";
 import { useNavigate } from "react-router-dom";
 
+const GoogleLoginButton = styled(OriginalGoogleLoginButton)`
+  background-color: #262626 !important;
+  color: white !important;
+  box-shadow: 5px 5px 5px 5px #525252 !important;
+
+  &:hover {
+    background-color: #171717 !important;
+    
+  }
+`;
+
 const Login = () => {
-  const { setIsLoggedIn, setUserData} = useUserDataStore();
-  const navigate=useNavigate();
+  const { setIsLoggedIn, setUserData } = useUserDataStore();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -19,19 +31,19 @@ const Login = () => {
       });
 
       navigate("/problem-list");
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };
 
   return (
-    <div className="w-full h-[100vh]  items-center ">
+    <div className="w-full h-[100vh] flex items-center justify-center overflow-hidden">
       <div className="relative h-full w-full bg-black">
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-        <div className="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
-      </div>
-      <div className="w-[310px] shadow-2xl">
-        <GoogleLoginButton onClick={handleLogin} />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[310px] shadow-2xl">
+          <GoogleLoginButton onClick={handleLogin} />
+        </div>
       </div>
     </div>
   );
