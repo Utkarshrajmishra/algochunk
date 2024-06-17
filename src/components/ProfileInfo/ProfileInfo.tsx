@@ -9,7 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut, getAuth } from "firebase/auth";
 
+import useUserDataStore from "@/zustang/useUserData";
 
 type UserData = {
   userName: string;
@@ -22,6 +24,24 @@ interface ProfileProps {
 }
 
 const Profile: FC<ProfileProps> = ({ Data }) => {
+
+    const {setIsLoggedIn, setUserData}=useUserDataStore();
+
+    const logout=()=>{
+        const auth = getAuth();
+        signOut(auth)
+          .then(() => {
+            setIsLoggedIn(false);
+            setUserData({
+              userEmail: "",
+              userName: "",
+              userImageUrl: "",
+            });
+          })
+          .catch((error) => console.log(error));
+        
+    }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -46,7 +66,7 @@ const Profile: FC<ProfileProps> = ({ Data }) => {
             <span>{Data.userEmail}</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={()=> logout()}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
           </DropdownMenuItem>

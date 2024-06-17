@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="shadow-md bg-neutral-900 shadow-neutral-500">
+      <nav className="shadow-sm  shadow-neutral-500">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
           <NavLink
             to="/"
