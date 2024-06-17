@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="mx-auto h-full w-full overflow-hidden">
+      <div className="mx-auto h-full w-full overflow-hidden pt-12 md:pt-0 lg:pt-0">
         <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
         <main className="flex md:flex-row basis-1/2 md:gap-10 gap-3 flex-col items-center h-fit lg:h-[100vh] overflow-hidden">
           <section className="md:w-[50%] text-zinc-200 leading-7 tracking-wide flex flex-col gap-4 px-10 text-center md:text-left ">

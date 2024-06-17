@@ -1,23 +1,37 @@
 import "./App.css";
+import Navbar from "./components/Navbar/Nav";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route
-          path="/problem-list"
+          path="problem"
           element={
             <ProtectedRoute>
-              <ProblemList />
+              <Problem />
             </ProtectedRoute>
           }
         />
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+
+          <Route
+            path="problem-list"
+            element={
+              <ProtectedRoute>
+                <ProblemList />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
