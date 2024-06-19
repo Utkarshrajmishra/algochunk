@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
+import CommunityPage from "./pages/Community";
 
 function App() {
   return (
@@ -34,6 +35,12 @@ function App() {
             }
           />
           <Route path="/playground" element={<Playground />} />
+
+          < Route path="/community-section" element={
+            <ProtectedRoute>
+              <CommunityPage/>
+            </ProtectedRoute>
+          }/>
         </Route>
       </Routes>
     </BrowserRouter>
