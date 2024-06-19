@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Nav";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Playground from "./pages/Playgroud";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Problem from "./pages/Problem";
@@ -20,6 +21,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
 
@@ -31,6 +33,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/playground" element={<Playground />} />
         </Route>
       </Routes>
     </BrowserRouter>
