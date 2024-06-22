@@ -1,9 +1,12 @@
+// Login.tsx
+
 import styled from "styled-components";
 import { GoogleLoginButton as OriginalGoogleLoginButton } from "react-social-login-buttons";
 import { authRef, AuthProvider } from "@/Firebase";
 import { signInWithPopup } from "firebase/auth";
 import useUserDataStore from "@/zustang/useUserData";
 import { useNavigate } from "react-router-dom";
+import dbService from "@/firebaseService/dbService";
 
 const GoogleLoginButton = styled(OriginalGoogleLoginButton)`
   background-color: #262626 !important;
@@ -12,7 +15,6 @@ const GoogleLoginButton = styled(OriginalGoogleLoginButton)`
 
   &:hover {
     background-color: #171717 !important;
-    
   }
 `;
 
@@ -30,9 +32,35 @@ const Login = () => {
         userImageUrl: res.user.photoURL || "",
       });
 
+      
+      await uploadUserData(
+        res.user.uid,
+        res.user.email || "",
+        res.user.photoURL || "",
+        res.user.displayName || ""
+      );
+
       navigate("/problem-list");
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error:any) {
+      console.error("Error signing in with Google:", error.message);
+    }
+  };
+
+  const uploadUserData = async (
+    id: string,
+    email: string,
+    photoUrl: string,
+    name: string
+  ) => {
+    try {
+      const result = await dbService.SaveUserProfile(id, email, photoUrl, name);
+      if (result.status) {
+        console.log("User profile saved successfully");
+      } else {
+        console.error("Error saving user profile:", result.error);
+      }
+    } catch (error:any) {
+      console.error("Error saving user profile:", error.message);
     }
   };
 
