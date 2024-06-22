@@ -49,9 +49,10 @@ const CreatePost=()=>{
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid items-center gap-4">
+           
             <Textarea
               id="post-content"
-              placeholder="What do you want to talk about?"
+              placeholder="What do you want to talk about? (Content)"
               className="col-span-3 bg-neutral-950 min-h-40 text-white"
               rows={6}
               {...register("postContent")}

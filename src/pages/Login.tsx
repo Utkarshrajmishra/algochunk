@@ -30,6 +30,7 @@ const Login = () => {
         userEmail: res.user.email || "",
         userName: res.user.displayName || "",
         userImageUrl: res.user.photoURL || "",
+        uid: res.user.uid || "",
       });
 
       

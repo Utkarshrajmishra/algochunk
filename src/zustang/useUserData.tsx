@@ -4,6 +4,7 @@ interface Data {
   userName: string;
   userEmail: string;
   userImageUrl: string;
+  uid:string
 }
 
 interface UserData {
@@ -19,6 +20,7 @@ const useUserDataStore = create<UserData>((set) => ({
     userName: "",
     userEmail: "",
     userImageUrl: "",
+    uid:""
   },
   setUserData: (data: Data) => {
     sessionStorage.setItem("userData", JSON.stringify(data));
