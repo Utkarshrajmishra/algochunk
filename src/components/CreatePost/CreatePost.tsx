@@ -1,7 +1,6 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postSchema } from "@/zod/PostSchema"; // Adjust the import path as necessary
+import { postSchema } from "@/zod/PostSchema"; 
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,8 +13,10 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { LuPenSquare } from "react-icons/lu";
+import { databaseRef } from "@/Firebase";
+import { setDoc, doc } from "firebase/firestore";
 
-export function CreatePost() {
+const CreatePost=()=>{
   const {
     register,
     handleSubmit,
@@ -25,9 +26,12 @@ export function CreatePost() {
   });
 
   const onSubmit = (data:any) => {
-    console.log(data);
-    // Add your form submission logic here
+    uploadPost(data);
   };
+
+  const uploadPost= async(data:any)=>{
+   
+  }
 
   return (
     <Dialog>
