@@ -3,7 +3,7 @@ import { setDoc, doc } from "firebase/firestore";
 
 class DBService {
   async SaveUserProfile(
-    UserID:string,
+    UserID: string,
     UserEmail: string,
     UserImageUrl: string,
     UserName: string
@@ -15,7 +15,26 @@ class DBService {
         userName: UserName,
       });
       return { status: true, error: "" };
-    } catch (error:any) {
+    } catch (error: any) {
+      return { status: false, error: error.message };
+    }
+  }
+
+  async SavePost(
+    UserID: string,
+    PostDate: string,
+    PostContent: string,
+    PostTime: string
+  ) {
+    try {
+      await setDoc(doc(databaseRef, "Post"), {
+        UserID: UserID,
+        PostDate: PostDate,
+        PostTime: PostTime,
+        PostContent: PostContent,
+      });
+      return { status: true, error: "" };
+    } catch (error: any) {
       return { status: false, error: error.message };
     }
   }
