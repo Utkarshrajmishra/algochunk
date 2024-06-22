@@ -61,7 +61,7 @@ const Login = () => {
         console.error("Error saving user profile");
       }
     } catch (error:any) {
-      console.error("Error saving user profile:", error.message);
+      console.error("Error saving user profile:", error);
     }
   };
 

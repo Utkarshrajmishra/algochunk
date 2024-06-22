@@ -1,5 +1,5 @@
 import { databaseRef } from "@/Firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 
 class DBService {
@@ -27,11 +27,11 @@ class DBService {
   ) {
     const TimeStamp=serverTimestamp()
     try {
-      await setDoc(doc(databaseRef, "Post"), {
-        UserID: UserID,
-        PostTime: TimeStamp,
-        PostContent: PostContent,
-      });
+        await addDoc(collection(databaseRef, "Post"),{
+            userId: UserID,
+            timeStamp:TimeStamp,
+            postContent:PostContent
+        })
       return { status: true, error: "" };
     } 
     catch (error: any) {

@@ -33,7 +33,19 @@ const CreatePost=()=>{
   };
 
   const uploadPost= async(content:string)=>{
-      
+      try{
+        const res = await dbService.SavePost(userData.uid,content);
+        if(res.status){
+          console.log("Post updated successfully")
+        }
+        else{
+          console.log("Error post upload", res.error)
+        }
+      }
+      catch(error:any){
+        console.log("Error: ", error)
+      }
+
   }
 
   return (
