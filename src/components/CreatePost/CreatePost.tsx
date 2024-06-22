@@ -13,10 +13,13 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { LuPenSquare } from "react-icons/lu";
-import { databaseRef } from "@/Firebase";
-import { setDoc, doc } from "firebase/firestore";
+import dbService from "@/firebaseService/dbService";
+import useUserDataStore from "@/zustang/useUserData";
 
 const CreatePost=()=>{
+
+  const {userData}=useUserDataStore()
+
   const {
     register,
     handleSubmit,
@@ -26,11 +29,11 @@ const CreatePost=()=>{
   });
 
   const onSubmit = (data:any) => {
-    uploadPost(data);
+    uploadPost(data.postContent)
   };
 
-  const uploadPost= async(data:any)=>{
-   
+  const uploadPost= async(content:string)=>{
+      
   }
 
   return (

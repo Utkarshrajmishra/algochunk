@@ -1,5 +1,6 @@
 import { databaseRef } from "@/Firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 
 class DBService {
   async SaveUserProfile(
@@ -22,19 +23,18 @@ class DBService {
 
   async SavePost(
     UserID: string,
-    PostDate: string,
     PostContent: string,
-    PostTime: string
   ) {
+    const TimeStamp=serverTimestamp()
     try {
       await setDoc(doc(databaseRef, "Post"), {
         UserID: UserID,
-        PostDate: PostDate,
-        PostTime: PostTime,
+        PostTime: TimeStamp,
         PostContent: PostContent,
       });
       return { status: true, error: "" };
-    } catch (error: any) {
+    } 
+    catch (error: any) {
       return { status: false, error: error.message };
     }
   }

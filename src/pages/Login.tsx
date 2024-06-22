@@ -58,7 +58,7 @@ const Login = () => {
       if (result.status) {
         console.log("User profile saved successfully");
       } else {
-        console.error("Error saving user profile:", result.error);
+        console.error("Error saving user profile");
       }
     } catch (error:any) {
       console.error("Error saving user profile:", error.message);
