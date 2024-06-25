@@ -1,7 +1,15 @@
 import { databaseRef } from "@/Firebase";
-import { addDoc, collection, setDoc, doc,getDocs, query, orderBy, getDoc } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc,getDocs, query, orderBy, getDoc, Timestamp } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 
+ interface Post {
+   id: string;
+   photoUrl: string;
+   userName: string;
+   userID: string;
+   postContent: string;
+   timeStamp: Timestamp;
+ }
 class DBService {
   async SaveUserProfile(
     UserID: string,
@@ -22,38 +30,42 @@ class DBService {
   }
 
   async SavePost(
-   PhotoUrl:string,
-   UserName:string,
+    PhotoUrl: string,
+    UserName: string,
     UserID: string,
-    PostContent: string,
+    PostContent: string
   ) {
-    const TimeStamp=serverTimestamp()
-    
+    const TimeStamp = serverTimestamp();
+
     try {
-        await addDoc(collection(databaseRef, "Post"),{
-            photoUrl:PhotoUrl,
-            userName: UserName,
-            userId: UserID,
-            timeStamp:TimeStamp,
-            postContent:PostContent
-        })
+      await addDoc(collection(databaseRef, "Post"), {
+        photoUrl: PhotoUrl,
+        userName: UserName,
+        userId: UserID,
+        timeStamp: TimeStamp,
+        postContent: PostContent,
+      });
       return { status: true, error: "" };
-    } 
-    catch (error: any) {
+    } catch (error: any) {
       return { status: false, error: error.message };
     }
   }
 
-  async getDocs(){
-   try{
-    const postQuery= query(collection(databaseRef, "Post"), orderBy("timeStamp","desc"));
-    const postSnapshot=await getDocs(postQuery);
-    const post=postSnapshot.docs.map(doc=>doc.data)
-    return {status:true, post:post}
-   }
-   catch(error:any){
-    return {status:false, error: error.message}
-   }
+  async getPost() {
+    try {
+      const postQuery = query(
+        collection(databaseRef, "Post"),
+        orderBy("timeStamp", "desc")
+      );
+      const postSnapshot = await getDocs(postQuery);
+      const posts: Post[] = postSnapshot.docs.map((doc) => ({
+        id: doc.id, // Assuming Firestore document ID
+        ...doc.data(),
+      })) as Post[];
+      return { status: true, post: posts };
+    } catch (error: any) {
+      return { status: false, error: error.message };
+    }
   }
 }
 

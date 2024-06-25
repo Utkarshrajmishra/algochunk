@@ -1,11 +1,46 @@
 import CreatePost from "@/components/CreatePost/CreatePost";
-
+import dbService from "@/firebaseService/dbService";
+import { useEffect, useState } from "react";
+import { Timestamp } from "firebase/firestore";
+import PostComp from "@/components/Post/Post";
+interface Post {
+  id: string;
+  photoUrl: string;
+  userName: string;
+  userID: string;
+  postContent: string;
+  timeStamp: Timestamp;
+}
 
 const CommunityPage = () => {
+  const [allPost, setPost] = useState<Post[]>();
+
+  useEffect(() => {
+    const getAllPost = async () => {
+      try {
+        const data = await dbService.getPost();
+        if (data.status && data.post) {
+          setPost(data.post);
+        
+        } else {
+          console.log(data.error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAllPost();
+  }, []);
+
   return (
     <>
       <div className="min-h-[100vh] bg-neutral-950 flex justify-center">
-        <section className=" w-[800px]"></section>
+        <section className=" w-[800px]">
+           {allPost?.map((post) => (
+            <PostComp key={post.id} Post={post} />
+          ))} 
+        </section>
         <CreatePost />
       </div>
     </>
