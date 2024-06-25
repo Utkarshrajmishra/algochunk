@@ -29,12 +29,13 @@ const CreatePost=()=>{
   });
 
   const onSubmit = (data:any) => {
-    uploadPost(data.postContent)
+    const processedPostContent = data.postContent.split("\n").join("\\n");
+    uploadPost(processedPostContent)
   };
 
   const uploadPost= async(content:string)=>{
       try{
-        const res = await dbService.SavePost(userData.uid,content);
+        const res = await dbService.SavePost(userData.userImageUrl,userData.userName,userData.uid,content);
         if(res.status){
           console.log("Post updated successfully")
         }

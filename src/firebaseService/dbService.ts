@@ -22,12 +22,17 @@ class DBService {
   }
 
   async SavePost(
+   PhotoUrl:string,
+   UserName:string,
     UserID: string,
     PostContent: string,
   ) {
     const TimeStamp=serverTimestamp()
+    
     try {
         await addDoc(collection(databaseRef, "Post"),{
+            photoUrl:PhotoUrl,
+            userName: UserName,
             userId: UserID,
             timeStamp:TimeStamp,
             postContent:PostContent
