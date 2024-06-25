@@ -1,5 +1,5 @@
 import { databaseRef } from "@/Firebase";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc,getDocs, query, orderBy, getDoc } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 
 class DBService {
@@ -37,6 +37,18 @@ class DBService {
     catch (error: any) {
       return { status: false, error: error.message };
     }
+  }
+
+  async getDocs(){
+   try{
+    const postQuery= query(collection(databaseRef, "Post"), orderBy("timeStamp","desc"));
+    const postSnapshot=await getDocs(postQuery);
+    const post=postSnapshot.docs.map(doc=>doc.data)
+    return {status:true, post:post}
+   }
+   catch(error:any){
+    return {status:false, error: error.message}
+   }
   }
 }
 
