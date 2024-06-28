@@ -1,15 +1,25 @@
 import { databaseRef } from "@/Firebase";
-import { addDoc, collection, setDoc, doc,getDocs, query, orderBy, getDoc, Timestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  setDoc,
+  doc,
+  getDocs,
+  query,
+  orderBy,
+  getDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
-
- interface Post {
-   id: string;
-   photoUrl: string;
-   userName: string;
-   userID: string;
-   postContent: string;
-   timeStamp: Timestamp;
- }
+import generate30Dates from "@/utils/GenerateDates";
+interface Post {
+  id: string;
+  photoUrl: string;
+  userName: string;
+  userID: string;
+  postContent: string;
+  timeStamp: Timestamp;
+}
 class DBService {
   async SaveUserProfile(
     UserID: string,
@@ -67,7 +77,26 @@ class DBService {
       return { status: false, error: error.message };
     }
   }
+
+  async checkDocumentExists(collectionName: string, docID: string) {
+    const document = doc(databaseRef, collectionName, docID);
+    const docSnap = await getDoc(document);
+
+    return docSnap.exists();
+  }
+
+  async saveDates(userId:string){
+    const Dates=generate30Dates()
+    try {
+      await setDoc(doc(databaseRef,"ProblemDates",userId), Dates);
+      return {status:true, data:"user"}
+    } catch (error:any) {
+      return {status:false, error:error.message}
+    }
+  }
+
+  
 }
 
-const dbService=new DBService();
-export default dbService
+const dbService = new DBService();
+export default dbService;
