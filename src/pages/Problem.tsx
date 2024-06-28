@@ -121,15 +121,15 @@ const Problem = () => {
           />
           <div>
             <div className="flex h-full items-center gap-3">
-              <RiSave2Line fontSize="1.3em" className="cursor-pointer" />
-              <TbReload fontSize="1.3em" className="cursor-pointer" onClick={()=>setCode("")}/>
+              <RiSave2Line fontSize="1.3em" className="cursor-pointer" color="white"/>
+              <TbReload fontSize="1.3em" className="cursor-pointer" onClick={()=>setCode("")} color="white"/>
             </div>
           </div>
         </div>
         <div className="flex gap-4 justify-between">
           <DialogComp code={code} language={language} />
           <Button
-            className="bg-green-500  shadow-green-600 font-bold text-white  w-fit h-10 shadow-lg hover:bg-green-500  hover:shadow-green-500"
+            className="bg-neutral-800  font-bold text-white  w-fit h-10 shadow-lg hover:bg-neutral-700"
             onClick={handleCompile}
           >
             {processing ? "Processing.." : "Compile and Excute"}

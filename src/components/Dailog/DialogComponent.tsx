@@ -73,7 +73,7 @@ const DialogComp: React.FC<DialogProps> = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="bg-gradient-to-r from-green-400 to-green-500 outline-none font-bold shadow-xl shadow-green-400 hover:shadow-green-500 min-w-20 hover:bg-green-500"
+          className="bg-neutral-800 outline-none font-bold  min-w-20 hover:bg-neutral-700"
           onClick={handleGemini}
         >
           {processing ? "Processing..." : "Ask Gemini"}

@@ -5,10 +5,10 @@ export const Styles = {
     maxWidth: "14rem",
     minWidth: "12rem",
     borderRadius: "5px",
-    color: "#000",
+    color: "white",
     fontSize: "0.8rem",
     lineHeight: "1.75rem",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#262626",
     cursor: "pointer",
     border: "2px solid #000000",
     boxShadow: "5px 5px 0px 0px rgba(0,0,0);",
@@ -17,38 +17,37 @@ export const Styles = {
       boxShadow: "none",
     },
   }),
-  option: (styles: any) => {
-    return {
-      ...styles,
-      color: "#000",
-      fontSize: "0.8rem",
-      lineHeight: "1.75rem",
-      width: "100%",
-      background: "#fff",
-      ":hover": {
-        backgroundColor: "rgb(243 244 246)",
-        color: "#000",
-        cursor: "pointer",
-      },
-    };
-  },
-  menu: (styles: any) => {
-    return {
-      ...styles,
-      backgroundColor: "#fff",
-      maxWidth: "14rem",
-      border: "2px solid #000000",
-      borderRadius: "5px",
-      boxShadow: "5px 5px 0px 0px rgba(0,0,0);",
-    };
-  },
-
-  placeholder: (defaultStyles: any) => {
-    return {
-      ...defaultStyles,
-      color: "#000",
-      fontSize: "0.8rem",
-      lineHeight: "1.75rem",
-    };
-  },
+  option: (styles: any) => ({
+    ...styles,
+    color: "white",
+    fontSize: "0.8rem",
+    lineHeight: "1.75rem",
+    width: "100%",
+    background: "#262626",
+    ":hover": {
+      backgroundColor: "#18181b",
+      color: "#e4e4e7",
+      cursor: "pointer",
+    },
+  }),
+  menu: (styles: any) => ({
+    ...styles,
+    backgroundColor: "#262626",
+    maxWidth: "14rem",
+    border: "2px solid #000000",
+    borderRadius: "5px",
+    boxShadow: "5px 5px 0px 0px rgba(0,0,0);",
+  }),
+  placeholder: (defaultStyles: any) => ({
+    ...defaultStyles,
+    color: "white",
+    fontSize: "0.8rem",
+    lineHeight: "1.75rem",
+  }),
+  singleValue: (styles: any) => ({
+    ...styles,
+    color: "white", // Change the text color here
+    fontSize: "0.8rem",
+    lineHeight: "1.75rem",
+  }),
 };
