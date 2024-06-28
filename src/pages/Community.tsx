@@ -21,7 +21,6 @@ const CommunityPage = () => {
         const data = await dbService.getPost();
         if (data.status && data.post) {
           setPost(data.post);
-        
         } else {
           console.log(data.error);
         }
@@ -31,15 +30,18 @@ const CommunityPage = () => {
     };
 
     getAllPost();
-  }, []);
+  });
 
   return (
     <>
-      <div className="min-h-[100vh] bg-neutral-950 flex justify-center">
-        <section className=" w-[800px]">
-           {allPost?.map((post) => (
-            <PostComp key={post.id} Post={post} />
-          ))} 
+      <div className="max-h-[100vh] overflow-hidden bg-neutral-950 flex justify-center">
+        <section className=" w-[800px] overflow-y-auto p-4 ">
+          {allPost?.map((post) => (
+            <div className="py-2 ">
+              {" "}
+              <PostComp key={post.id} Post={post} />
+            </div>
+          ))}
         </section>
         <CreatePost />
       </div>

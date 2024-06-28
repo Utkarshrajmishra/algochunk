@@ -17,9 +17,12 @@ interface PostProps {
 
 const PostComp: FC<PostProps> = ({ Post }) => {
   const time = formatPostTime(Post.timeStamp);
+  const formatText = (text: string) => {
+    return text.replace(/\n/g, "<br />");
+  };
 
   return (
-    <div className="outline h-fit outline-1 bg-neutral-900 rounded-lg p-4">
+    <div className="outline h-fit w-full outline-1 outline-zinc-700 rounded-lg p-3 shadow shadow-zinc-700">
       <div className="flex p-3 pt-0">
         <img
           src={Post.photoUrl}
@@ -34,16 +37,10 @@ const PostComp: FC<PostProps> = ({ Post }) => {
           <p className="text-sm">{time}</p>
         </div>
       </div>
-      <div className="text-zinc-200 p-3 tracking-wide rounded-xl bg-neutral-800  ">
-        <p className="tracking-wider leading-9">
-          🌟 Welcome to Our Community 🌟
-          <br />
-          Hello everyone! Welcome to our community dedicated to mastering Data
-          Structures and Algorithms (DSA) along with Frontend Development!
-          <br />
-          🚀 Whether you're just starting your coding journey or looking to
-          sharpen your skills, you're in the right place.
-        </p>
+      <div className="text-zinc-200 p-3 tracking-wide rounded-xl bg-neutral-900  ">
+        <div
+          dangerouslySetInnerHTML={{ __html: formatText(Post.postContent) }}
+        />
       </div>
     </div>
   );
