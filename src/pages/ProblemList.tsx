@@ -5,7 +5,7 @@ import useDataStore from "@/zustang/useDataStore";
 import TableList from "@/components/Table/TableList";
 
 const ProblemList = () => {
-  const { problems, loading, getProblems } = useDataStore();
+  const { problems, getProblems } = useDataStore();
 
   useEffect(() => {
     getProblems();

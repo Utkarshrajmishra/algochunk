@@ -16,6 +16,7 @@ import { useState } from "react";
 
 interface Problem {
   id: string;
+  ProblemID:string,
   Title: string;
   Statement: string;
   Level: string;

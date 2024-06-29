@@ -4,6 +4,7 @@ import { databaseRef } from "@/Firebase";
 
 interface Problem {
   id: string;
+  ProblemID:string
   Title: string;
   Statement: string;
   Level: string;
