@@ -41,11 +41,30 @@ const Login = () => {
         res.user.displayName || ""
       );
 
+      CheckUser(res.user.uid);
+
       navigate("/problem-list");
     } catch (error:any) {
       console.error("Error signing in with Google:", error.message);
     }
   };
+
+  const CheckUser= async (userID:string)=>{
+    const status= await dbService.checkDocumentExists("ProblemDates", userID)
+    if(!status){
+      try {
+        const response=await dbService.saveDates(userID);
+        if(response.status){
+          console.log("successfull")
+        }
+        else{
+          console.log(response.error)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   const uploadUserData = async (
     id: string,
