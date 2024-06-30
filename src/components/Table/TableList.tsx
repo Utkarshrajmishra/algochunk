@@ -13,7 +13,8 @@ import useProblemStore from "@/zustang/useProblemStore";
 import useDataStore from "@/zustang/useDataStore";
 import { Input } from "../ui/input";
 import { useState } from "react";
-
+import { useDateStore } from "@/zustang/useDateStore";
+import useUserDataStore from "@/zustang/useUserData";
 interface Problem {
   id: string;
   ProblemID:string,
@@ -34,6 +35,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
   const { updateProblem } = useProblemStore();
   const navigate = useNavigate();
   const {loading}=useDataStore()
+  const {dateData, fetchData}=useDateStore();
+  const {userData}=useUserDataStore();
+
 
   const updateProblemState = (
     title: string,
@@ -43,6 +47,11 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     output: string,
     constraints: string
   ) => {
+
+    fetchData(userData.uid);
+
+
+
     updateProblem("Title", title);
     updateProblem("Statement", statement);
     updateProblem("Level", level);
