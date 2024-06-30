@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import useDataStore from "@/zustang/useDataStore";
-
 import TableList from "@/components/Table/TableList";
 
 const ProblemList = () => {
