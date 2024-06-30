@@ -40,6 +40,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
 
 
   const updateProblemState = (
+    id: string,
     title: string,
     statement: string,
     level: string,
@@ -50,8 +51,8 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
 
     fetchData(userData.uid);
 
-
-
+    if(Number(dateData)>=Number(id)|| Number(dateData)==-1)
+      {
     updateProblem("Title", title);
     updateProblem("Statement", statement);
     updateProblem("Level", level);
@@ -59,6 +60,10 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     updateProblem("Output", output);
     updateProblem("Contraints", constraints);
     navigate("/problem");
+      }
+      else{
+        console.log("NO")
+      }
   };
 
   return (
@@ -120,6 +125,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                           className="cursor-pointer w-[420px]"
                           onClick={() =>
                             updateProblemState(
+                              prob.id,
                               prob.Title,
                               prob.Statement,
                               prob.Level,
