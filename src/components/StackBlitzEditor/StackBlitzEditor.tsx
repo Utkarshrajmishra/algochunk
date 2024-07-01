@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import sdk from "@stackblitz/sdk";
 
-const StackBlitzEditor: React.FC = () => {
+
+interface stackblitzProps{
+ width:string,
+ height: string
+}
+
+const StackBlitzEditor: React.FC<stackblitzProps> = ({width, height}: stackblitzProps) => {
   useEffect(() => {
     // Embed the StackBlitz project
     sdk.embedProjectId("editor", "stackblitz-starters-hkpxas", {
@@ -11,7 +17,7 @@ const StackBlitzEditor: React.FC = () => {
   }, []);
 
   return (
-    <section className="w-[100%] h-[100vh]">
+    <section className={`${width} ${height}`}>
       <div id="editor" className="w-full h-full"></div>
     </section>
   );
