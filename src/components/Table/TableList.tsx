@@ -15,10 +15,12 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import { useDateStore } from "@/zustang/useDateStore";
 import useUserDataStore from "@/zustang/useUserData";
+import { AlertDialogCustom } from "../ui/AlertDialogCustom";
+
 interface Problem {
   id: string;
   ProblemID: string;
-  Tag:string
+  Tag: string;
   Title: string;
   Statement: string;
   Level: string;
@@ -38,6 +40,11 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
   const { loading } = useDataStore();
   const { dateData, fetchData } = useDateStore();
   const { userData } = useUserDataStore();
+  const [alert, setAlert] = useState({
+    open: false,
+    title: "",
+    content: "",
+  });
 
   const updateProblemState = (
     id: string,
@@ -59,8 +66,17 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
       updateProblem("Contraints", constraints);
       navigate("/problem");
     } else {
-      alert("NO")
+      let day = Number(id) + 1;
+      setAlert({
+        open: true,
+        title: "This problem is currently locked",
+        content: `You cannot access this problem. This problem is currently locked and will unlock on day ${day}.`,
+      });
     }
+  };
+
+  const closeAlert = () => {
+    setAlert({ ...alert, open: false });
   };
 
   return (
@@ -154,6 +170,12 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
           </Table>
         </div>
       </div>
+      <AlertDialogCustom
+        open={alert.open}
+        onClose={closeAlert}
+        title={alert.title}
+        content={alert.content}
+      />
     </>
   );
 };

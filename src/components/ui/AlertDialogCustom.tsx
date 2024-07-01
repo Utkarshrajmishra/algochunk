@@ -7,29 +7,33 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 
+interface AlertDialogCustomProps {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  content: string;
+}
 
-export function AlertDialogCustom(message:string) {
+export const AlertDialogCustom: React.FC<AlertDialogCustomProps> = ({
+  open,
+  onClose,
+  title,
+  content,
+}) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
+    <AlertDialog open={open}>
+      <AlertDialogContent className="bg-neutral-950 text-zinc-200">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            {message}
-          </AlertDialogDescription>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription className="text-zinc-400">{content}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel onClick={onClose} className="bg-neutral-900 hover:bg-neutral-950 hover:text-zinc-200">Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onClose} className="bg-neutral-900">Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
-}
+};
