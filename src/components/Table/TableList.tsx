@@ -17,7 +17,8 @@ import { useDateStore } from "@/zustang/useDateStore";
 import useUserDataStore from "@/zustang/useUserData";
 interface Problem {
   id: string;
-  ProblemID:string,
+  ProblemID: string;
+  Tag:string
   Title: string;
   Statement: string;
   Level: string;
@@ -34,10 +35,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
   const [filter, setFilter] = useState("");
   const { updateProblem } = useProblemStore();
   const navigate = useNavigate();
-  const {loading}=useDataStore()
-  const {dateData, fetchData}=useDateStore();
-  const {userData}=useUserDataStore();
-
+  const { loading } = useDataStore();
+  const { dateData, fetchData } = useDateStore();
+  const { userData } = useUserDataStore();
 
   const updateProblemState = (
     id: string,
@@ -48,22 +48,19 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     output: string,
     constraints: string
   ) => {
-
     fetchData(userData.uid);
 
-    if(Number(dateData)>=Number(id)|| Number(dateData)==-1)
-      {
-    updateProblem("Title", title);
-    updateProblem("Statement", statement);
-    updateProblem("Level", level);
-    updateProblem("Input", input);
-    updateProblem("Output", output);
-    updateProblem("Contraints", constraints);
-    navigate("/problem");
-      }
-      else{
-        console.log("NO")
-      }
+    if (Number(dateData) >= Number(id) || Number(dateData) == -1) {
+      updateProblem("Title", title);
+      updateProblem("Statement", statement);
+      updateProblem("Level", level);
+      updateProblem("Input", input);
+      updateProblem("Output", output);
+      updateProblem("Contraints", constraints);
+      navigate("/problem");
+    } else {
+      alert("NO")
+    }
   };
 
   return (
@@ -92,7 +89,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
             </TableHeader>
             <TableBody className="text-zinc-200">
               {loading
-                ? Array.from({ length: 10 }).map((_,indx) => (
+                ? Array.from({ length: 10 }).map((_, indx) => (
                     <TableRow key={indx} className="hover:bg-neutral-800">
                       <TableCell>
                         <Skeleton className="h-4 w-12" />
@@ -141,15 +138,15 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                           <p
                             className={
                               prob.Level === "Easy"
-                                ? "bg-green-500 text-white p-1 font-bold px-2 w-fit rounded-md"
-                                : "bg-yellow-500 p-1 text-white font-bold px-2 w-fit rounded-md"
+                                ? "bg-green-600 text-white p-1 font-bold px-2 w-fit rounded-md"
+                                : "bg-yellow-600 p-1 text-white font-bold px-2 w-fit rounded-md"
                             }
                           >
                             {prob.Level}
                           </p>
                         </TableCell>
                         <TableCell>
-                          <Badge className="bg-slate-800">Hash Map</Badge>
+                          <Badge className="bg-slate-800">{prob.Tag}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
