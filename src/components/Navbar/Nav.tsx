@@ -26,7 +26,7 @@ const Navbar = () => {
 
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {isLoggedIn ? (
-              <Profile Data={userData}/>
+              <Profile Data={userData} />
             ) : (
               <NavLink
                 to="/login"
@@ -96,7 +96,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="playground/react-editor"
                   className="block text-sm py-2 px-3 md:p-0 rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Playground

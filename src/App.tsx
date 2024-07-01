@@ -8,6 +8,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
 import CommunityPage from "./pages/Community";
+import React_Editor from "./pages/React_Editor";
 
 function App() {
   return (
@@ -23,8 +24,15 @@ function App() {
           }
         />
 
+       
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
+
+           <Route 
+          path="playground/react-editor"
+          element={<React_Editor/>}
+          />
+
 
           <Route
             path="problem-list"
