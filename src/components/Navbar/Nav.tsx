@@ -5,14 +5,14 @@ import Profile from "../ProfileInfo/ProfileInfo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {isLoggedIn,userData}=useUserDataStore()
+  const { isLoggedIn, userData } = useUserDataStore();
   const handleToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <>
-      <nav className="shadow-sm bg-neutral-900 shadow-neutral-500">
+      <nav className="fixed top-0 left-0 right-0 shadow-sm bg-neutral-900 shadow-neutral-500 z-50">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
           <NavLink
             to="/"
@@ -72,8 +72,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/"
-                  className="block py-2 text-sm px-3 md:p-0 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                  aria-current="page"
+                  className="block py-2 px-3 md:p-0 rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white text-sm dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Home
                 </NavLink>
@@ -114,7 +113,9 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <div className="pt-16">
+        <Outlet />
+      </div>
     </>
   );
 };
