@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { User, LogOut, Mail } from "lucide-react";
+import { User, LogOut, Mail, DatabaseIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +12,7 @@ import {
 import { signOut, getAuth } from "firebase/auth";
 
 import useUserDataStore from "@/zustang/useUserData";
+import { useNavigate } from "react-router-dom";
 
 type UserData = {
   userName: string;
@@ -24,6 +25,7 @@ interface ProfileProps {
 }
 
 const Profile: FC<ProfileProps> = ({ Data }) => {
+  const navigate=useNavigate()
 
     const {setIsLoggedIn, setUserData}=useUserDataStore();
 
@@ -33,6 +35,7 @@ const Profile: FC<ProfileProps> = ({ Data }) => {
           .then(() => {
             setIsLoggedIn(false);
             setUserData({
+              uid:"",
               userEmail: "",
               userName: "",
               userImageUrl: "",
@@ -41,6 +44,8 @@ const Profile: FC<ProfileProps> = ({ Data }) => {
           .catch((error) => console.log(error));
         
     }
+
+    
 
   return (
     <DropdownMenu>
@@ -56,17 +61,22 @@ const Profile: FC<ProfileProps> = ({ Data }) => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem >
+          <DropdownMenuItem className="cursor-pointer" onClick={()=> navigate("/user/dashboard")}>
+            <DatabaseIcon className="mr-2 h-4 w-4" />
+            <span>Dashboard</span>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <span>{Data.userName}</span>
           </DropdownMenuItem>
 
-          <DropdownMenuItem >
+          <DropdownMenuItem>
             <Mail className="mr-2 h-4 w-4" />
             <span>{Data.userEmail}</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={()=> logout()}>
+          <DropdownMenuItem onClick={() => logout()}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
           </DropdownMenuItem>
