@@ -6,7 +6,7 @@ import { useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
 import DialogComp from "@/components/Dailog/DialogComponent";
-
+import { AiOutlineLike } from "react-icons/ai";
 import { RiSave2Line } from "react-icons/ri";
 import { TbReload } from "react-icons/tb";
 
@@ -117,17 +117,29 @@ const Problem = () => {
           />
           <div>
             <div className="flex h-full items-center gap-3">
-              <RiSave2Line
-                fontSize="1.3em"
-                className="cursor-pointer"
-                color="white"
-              />
-              <TbReload
-                fontSize="1.3em"
-                className="cursor-pointer"
-                onClick={() => setCode("")}
-                color="white"
-              />
+              <div className="p-2 bg-neutral-800 rounded-lg">
+                <AiOutlineLike
+                  fontSize="1.3em"
+                  className="cursor-pointer"
+                  color="white"
+                />
+              </div>
+
+              <div className="p-2 bg-neutral-800 rounded-lg">
+                <RiSave2Line
+                  fontSize="1.3em"
+                  className="cursor-pointer"
+                  color="white"
+                />
+              </div>
+              <div className="p-2 bg-neutral-800 rounded-lg">
+                <TbReload
+                  fontSize="1.3em"
+                  className="cursor-pointer"
+                  onClick={() => setCode("")}
+                  color="white"
+                />
+              </div>
             </div>
           </div>
         </div>
