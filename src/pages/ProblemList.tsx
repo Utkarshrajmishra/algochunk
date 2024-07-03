@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import useDataStore from "@/zustang/useDataStore";
 import TableList from "@/components/Table/TableList";
 
@@ -12,15 +11,15 @@ const ProblemList = () => {
 
   return (
     <>
-      <section className="h-[100vh]">
+      <section className="h-[100vh] bg-neutral-950">
         <div className="relative h-fit w-full bg-neutral-950">
-          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e3e,transparent)]"></div>
-        <div className="lg:px-20 md:px-20py-3 px-3">
-          <div>
-            <TableList problems={problems} />
+          
+          <div className="lg:px-20 md:px-20py-3 px-3">
+            <div>
+              <TableList problems={problems} />
+            </div>
           </div>
         </div>
-      </div>
       </section>
     </>
   );

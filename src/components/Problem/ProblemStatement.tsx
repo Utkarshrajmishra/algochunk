@@ -15,7 +15,7 @@ const ProblemStatement = () => {
           <TimeCounter />
           <div className="flex justify-between">
             <h1 className="font-bold text-xl">{problems.Title}</h1>
-            <div className="bg-green-500 text-white py-1 px-2 rounded-lg font-semibold tex-sm ">
+            <div className="bg-green-600 text-white py-1 px-2 rounded-lg font-semibold tex-sm w-fit h-fit ">
               {problems.Level}
             </div>
           </div>

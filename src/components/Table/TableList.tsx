@@ -12,12 +12,10 @@ import { Badge } from "../ui/badge";
 import useProblemStore from "@/zustang/useProblemStore";
 import useDataStore from "@/zustang/useDataStore";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDateStore } from "@/zustang/useDateStore";
 import useUserDataStore from "@/zustang/useUserData";
-import { FaLock } from "react-icons/fa";
-import { FaLockOpen } from "react-icons/fa";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FaLock, FaLockOpen, FaLongArrowAltRight } from "react-icons/fa";
 import { AlertDialogCustom } from "../ui/AlertDialogCustom";
 
 interface Problem {
@@ -49,6 +47,10 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     content: "",
   });
 
+  useEffect(() => {
+    fetchData(userData.uid);
+  }, [userData.uid, fetchData]);
+
   const updateProblemState = (
     id: string,
     title: string,
@@ -58,11 +60,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
     output: string,
     constraints: string
   ) => {
-    fetchData(userData.uid);
-
-    if (Number(dateData) >= Number(id) || Number(dateData) == -1) {
+    if (Number(dateData) >= Number(id) || Number(dateData) === -1) {
       updateProblem("Title", title);
-      updateProblem("ID",id)
+      updateProblem("ID", id);
       updateProblem("Statement", statement);
       updateProblem("Level", level);
       updateProblem("Input", input);
@@ -70,7 +70,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
       updateProblem("Contraints", constraints);
       navigate("/problem");
     } else {
-      let day = Number(id) + 1;
+      const day = Number(id) + 1;
       setAlert({
         open: true,
         title: "This problem is currently locked",
@@ -119,7 +119,6 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                       <TableCell>
                         <Skeleton className="h-4 w-16" />
                       </TableCell>
-
                       <TableCell className="w-[420px]">
                         <Skeleton className="h-4 w-full" />
                       </TableCell>
@@ -135,13 +134,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                     </TableRow>
                   ))
                 : problems
-                    ?.filter((prob) => {
-                      return filter === ""
-                        ? prob
-                        : prob.Title.toLowerCase().includes(
-                            filter.toLowerCase()
-                          );
-                    })
+                    ?.filter((prob) =>
+                      prob.Title.toLowerCase().includes(filter.toLowerCase())
+                    )
                     .map((prob, indx) => (
                       <TableRow key={indx} className="hover:bg-neutral-800">
                         <TableCell className="font-medium">
@@ -187,16 +182,21 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                           </Badge>
                         </TableCell>
                         <TableCell className="cursor-pointer">
-                          <FaLongArrowAltRight fontSize={22} color="#2563eb" onClick={() => updateProblemState(
-                              prob.id,
-                              prob.Title,
-                              prob.Statement,
-                              prob.Level,
-                              prob.Input,
-                              prob.Output,
-                              prob.Contraints
-                            )
-                          }/>
+                          <FaLongArrowAltRight
+                            fontSize={22}
+                            color="#2563eb"
+                            onClick={() =>
+                              updateProblemState(
+                                prob.id,
+                                prob.Title,
+                                prob.Statement,
+                                prob.Level,
+                                prob.Input,
+                                prob.Output,
+                                prob.Contraints
+                              )
+                            }
+                          />
                         </TableCell>
                       </TableRow>
                     ))}

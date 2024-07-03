@@ -1,5 +1,5 @@
-// Login.tsx
-
+// Login.tsx 
+import {toast,Toaster} from "react-hot-toast";
 import styled from "styled-components";
 import { GoogleLoginButton as OriginalGoogleLoginButton } from "react-social-login-buttons";
 import { authRef, AuthProvider } from "@/Firebase";
@@ -21,10 +21,13 @@ const GoogleLoginButton = styled(OriginalGoogleLoginButton)`
 const Login = () => {
   const { setIsLoggedIn, setUserData } = useUserDataStore();
   const navigate = useNavigate();
+  
 
   const handleLogin = async () => {
+    
     try {
       const res = await signInWithPopup(authRef, AuthProvider);
+
       setIsLoggedIn(true);
       setUserData({
         userEmail: res.user.email || "",
@@ -33,7 +36,6 @@ const Login = () => {
         uid: res.user.uid || "",
       });
 
-      
       await uploadUserData(
         res.user.uid,
         res.user.email || "",
@@ -41,30 +43,33 @@ const Login = () => {
         res.user.displayName || ""
       );
 
-      CheckUser(res.user.uid);
+      await CheckUser(res.user.uid);
 
-      navigate("/problem-list");
-    } catch (error:any) {
-      console.error("Error signing in with Google:", error.message);
+      navigate("/");
+      
+    } catch (error: any) {
+      const id= toast.error(`Error signing in: ${error.message}`, {
+        duration: 5000,
+      });
+      toast.dismiss(id);
     }
   };
 
-  const CheckUser= async (userID:string)=>{
-    const status= await dbService.checkDocumentExists("ProblemDates", userID)
-    if(!status){
+  const CheckUser = async (userID: string) => {
+    const status = await dbService.checkDocumentExists("ProblemDates", userID);
+    if (!status) {
       try {
-        const response=await dbService.saveDates(userID);
-        if(response.status){
-          console.log("successfull")
+        const response = await dbService.saveDates(userID);
+        if (response.status) {
+          // Successfully saved dates
+        } else {
+          toast.error("Some error has occurred", { duration: 5000 });
         }
-        else{
-          console.log(response.error)
-        }
-      } catch (error) {
-        console.log(error)
+      } catch (error: any) {
+        toast.error(`Error: ${error.message}`, { duration: 5000 });
       }
     }
-  }
+  };
 
   const uploadUserData = async (
     id: string,
@@ -74,26 +79,27 @@ const Login = () => {
   ) => {
     try {
       const result = await dbService.SaveUserProfile(id, email, photoUrl, name);
-      if (result.status) {
-        console.log("User profile saved successfully");
-      } else {
-        console.error("Error saving user profile");
+      if (!result.status) {
+        toast.error("Some error has occurred", { duration: 5000 });
       }
-    } catch (error:any) {
-      console.error("Error saving user profile:", error);
+    } catch (error: any) {
+      toast.error(`Error: ${error.message}`, { duration: 5000 });
     }
   };
 
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center overflow-hidden">
-      <div className="relative h-full w-full bg-black">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[310px] shadow-2xl">
-          <GoogleLoginButton onClick={handleLogin} />
+    <>
+      <div className="w-full h-[100vh] flex items-center justify-center overflow-hidden">
+        <div className="relative h-full w-full bg-black">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div>
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[310px] shadow-2xl">
+            <GoogleLoginButton onClick={handleLogin} />
+          </div>
         </div>
       </div>
-    </div>
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
   );
 };
 
