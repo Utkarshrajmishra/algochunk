@@ -62,6 +62,7 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
 
     if (Number(dateData) >= Number(id) || Number(dateData) == -1) {
       updateProblem("Title", title);
+      updateProblem("ID",id)
       updateProblem("Statement", statement);
       updateProblem("Level", level);
       updateProblem("Input", input);

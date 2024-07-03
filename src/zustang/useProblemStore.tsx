@@ -3,6 +3,7 @@ import { persist, createJSONStorage, StateStorage } from "zustand/middleware";
 
 // Define the Problem interface
 interface Problem {
+  ID:string;
   Title: string;
   Statement: string;
   Level: string;
@@ -47,7 +48,9 @@ const getSessionStorage = (): StateStorage => {
 const useProblemStore = create<ProblemState>()(
   persist(
     (set) => ({
+      
       problems: {
+        ID:"",
         Title: "",
         Statement: "",
         Level: "",

@@ -2,31 +2,63 @@ import ProblemSwitch from "@/components/Problem/ProblemSwitch";
 import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
 import DialogComp from "@/components/Dailog/DialogComponent";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { RiSave2Line } from "react-icons/ri";
 import { TbReload } from "react-icons/tb";
+import { getStorage, editLocalStorage } from "@/utils/LocalStorage";
+import useProblemStore from "@/zustang/useProblemStore";
+import toast, { Toaster } from "react-hot-toast";
 
 const Problem = () => {
+  const { problems } = useProblemStore();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [LangId, setLangId] = useState(63);
   const [language, setLanguage] = useState("");
   const [processing, setProcessing] = useState(false);
   const [code, setCode] = useState<any>();
+  const [renderLikes, setRenderLikes] = useState(false);
 
   const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
     setLanguage(newLang.value);
   };
 
-  console.log(typeof language);
+  const handleLike = () => {
+    const status = !renderLikes;
+    const newStatus = editLocalStorage(problems.ID, "Likes", status);
+    toast.success("Like Updated!", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+    setRenderLikes(newStatus);
+  };
+
+  const SaveProblem=()=>{
+      const status=editLocalStorage(problems.ID,"savedProblems", true);
+      if(status) toast.success("Problem saved successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+  }
+
+  useEffect(() => {
+    const isLiked = getStorage(problems.ID, "Likes");
+    setRenderLikes(isLiked);
+  }, [problems.ID]);
 
   const handleCodeChange = (codeType: string, code: string) => {
-    if (codeType == "code") setCode(code);
+    if (codeType === "code") setCode(code);
   };
 
   const handleCompile = () => {
@@ -58,22 +90,18 @@ const Problem = () => {
       })
       .catch((err) => {
         console.log(err);
-
-        // get error status
-        let status = err.response.status;
-        //console.log("status", status);
+        const status = err.response.status;
         if (status === 429) {
           alert("Servers are busy, please try again later!");
         }
-        return setProcessing(false);
+        setProcessing(false);
       });
   };
 
   const checkStatus = async (token: any) => {
-    console.log(import.meta.env.VITE_API_URL);
     const options = {
       method: "GET",
-      url: import.meta.env.VITE_JUDGE_URL + "/" + token,
+      url: `${import.meta.env.VITE_JUDGE_URL}/${token}`,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
         "content-type": "application/json",
@@ -86,9 +114,7 @@ const Problem = () => {
       let response = await axios.request(options);
       let statusId = response.data.status?.id;
 
-      // Processed - we have a result
       if (statusId === 1 || statusId === 2) {
-        // still processing
         setTimeout(() => {
           checkStatus(token);
         }, 2000);
@@ -96,7 +122,6 @@ const Problem = () => {
       } else {
         setProcessing(false);
         setOutput(response.data);
-        //console.log("response.data", response.data);
         return;
       }
     } catch (err) {
@@ -117,16 +142,20 @@ const Problem = () => {
           />
           <div>
             <div className="flex h-full items-center gap-3">
-              <div className="p-2 bg-neutral-800 rounded-lg">
-                <AiOutlineLike
-                  fontSize="1.3em"
-                  className="cursor-pointer"
-                  color="white"
-                />
+              <div
+                className="p-2 bg-neutral-800 rounded-lg cursor-pointer"
+                onClick={handleLike}
+              >
+                {!renderLikes ? (
+                  <AiOutlineLike fontSize="1.3em" color="white" />
+                ) : (
+                  <AiFillLike fontSize="1.3em" color="white" />
+                )}
               </div>
 
               <div className="p-2 bg-neutral-800 rounded-lg">
                 <RiSave2Line
+                  onClick={SaveProblem}
                   fontSize="1.3em"
                   className="cursor-pointer"
                   color="white"
@@ -146,16 +175,16 @@ const Problem = () => {
         <div className="flex gap-4 justify-between">
           <DialogComp code={code} language={language} />
           <Button
-            className="bg-neutral-800  font-bold text-white  w-fit h-10 shadow-lg hover:bg-neutral-700"
+            className="bg-neutral-800 font-bold text-white w-fit h-10 shadow-lg hover:bg-neutral-700"
             onClick={handleCompile}
           >
-            {processing ? "Processing.." : "Compile and Excute"}
+            {processing ? "Processing.." : "Compile and Execute"}
           </Button>
           <LanguageDropDown handleLanguageChange={handleChangeLang} />
         </div>
       </div>
       <div className="flex px-3 pb-1 w-full bg-neutral-900">
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2">
           <ProblemSwitch />
           <Input onInputChange={setInput} input={input} output={output} />
         </div>
@@ -168,6 +197,7 @@ const Problem = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };
