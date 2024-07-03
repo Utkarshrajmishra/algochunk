@@ -15,6 +15,9 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 import { useDateStore } from "@/zustang/useDateStore";
 import useUserDataStore from "@/zustang/useUserData";
+import { FaLock } from "react-icons/fa";
+import { FaLockOpen } from "react-icons/fa";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import { AlertDialogCustom } from "../ui/AlertDialogCustom";
 
 interface Problem {
@@ -98,9 +101,11 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
             <TableHeader>
               <TableRow className="hover:bg-neutral-800">
                 <TableHead className="w-fit text-zinc-200">Day</TableHead>
+                <TableHead className="text-zinc-200">Status</TableHead>
                 <TableHead className="text-zinc-200">Problems</TableHead>
                 <TableHead className="text-zinc-200">Difficulty</TableHead>
                 <TableHead className="text-zinc-200">Tags</TableHead>
+                <TableHead className="text-zinc-200">Solve</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="text-zinc-200">
@@ -110,6 +115,10 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                       <TableCell>
                         <Skeleton className="h-4 w-12" />
                       </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-16" />
+                      </TableCell>
+
                       <TableCell className="w-[420px]">
                         <Skeleton className="h-4 w-full" />
                       </TableCell>
@@ -118,6 +127,9 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                       </TableCell>
                       <TableCell>
                         <Skeleton className="h-4 w-24" />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-4 w-16" />
                       </TableCell>
                     </TableRow>
                   ))
@@ -133,6 +145,13 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                       <TableRow key={indx} className="hover:bg-neutral-800">
                         <TableCell className="font-medium">
                           Day {indx + 1}
+                        </TableCell>
+                        <TableCell>
+                          {Number(dateData) < Number(prob.id) ? (
+                            <FaLock fontSize={17} color="yellow" />
+                          ) : (
+                            <FaLockOpen fontSize={17} color="yellow" />
+                          )}
                         </TableCell>
                         <TableCell
                           className="cursor-pointer w-[420px]"
@@ -162,7 +181,21 @@ const TableList: React.FC<TableListProps> = ({ problems }) => {
                           </p>
                         </TableCell>
                         <TableCell>
-                          <Badge className="bg-slate-800">{prob.Tag}</Badge>
+                          <Badge className="bg-slate-800 w-fit h-fit">
+                            {prob.Tag}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="cursor-pointer">
+                          <FaLongArrowAltRight fontSize={22} color="#2563eb" onClick={() => updateProblemState(
+                              prob.id,
+                              prob.Title,
+                              prob.Statement,
+                              prob.Level,
+                              prob.Input,
+                              prob.Output,
+                              prob.Contraints
+                            )
+                          }/>
                         </TableCell>
                       </TableRow>
                     ))}
