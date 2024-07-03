@@ -125,7 +125,7 @@ const Problem = () => {
         return;
       }
     } catch (err) {
-      console.log("err", err);
+      toast.error(`Error: ${err}`)
       setProcessing(false);
     }
   };

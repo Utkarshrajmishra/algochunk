@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Playground from "./pages/Playgroud";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
@@ -24,15 +25,15 @@ function App() {
           }
         />
 
-       
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
-
-           <Route 
-          path="playground/react-editor"
-          element={<React_Editor/>}
+          <Route path="/user/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard/>
+            </ProtectedRoute>
+          }
           />
-
+          <Route path="playground/react-editor" element={<React_Editor />} />
 
           <Route
             path="problem-list"
@@ -44,11 +45,14 @@ function App() {
           />
           <Route path="/playground" element={<Playground />} />
 
-          < Route path="/community-section" element={
-            <ProtectedRoute>
-              <CommunityPage/>
-            </ProtectedRoute>
-          }/>
+          <Route
+            path="/community-section"
+            element={
+              <ProtectedRoute>
+                <CommunityPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -23,4 +23,8 @@ export const getStorage = (problemID: string, key: string) => {
   return likedPosts.includes(problemID);
 };
 
+export const getStorageItems=(key:string)=>{
+  return JSON.parse(localStorage.getItem(key) || "[]")
+}
+
 
