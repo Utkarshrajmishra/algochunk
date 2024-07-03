@@ -27,4 +27,11 @@ export const getStorageItems=(key:string)=>{
   return JSON.parse(localStorage.getItem(key) || "[]")
 }
 
+export const saveProblem=(problemID:string)=>
+{
+  const item=JSON.parse(localStorage.getItem("SavedProblem") || "[]" );
+  const set=new Set(item);
+  set.add(problemID);
+  localStorage.setItem("SavedProblems",JSON.stringify(Array.from(set)))
+}
 

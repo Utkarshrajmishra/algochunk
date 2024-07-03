@@ -9,7 +9,7 @@ import DialogComp from "@/components/Dailog/DialogComponent";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { RiSave2Line } from "react-icons/ri";
 import { TbReload } from "react-icons/tb";
-import { getStorage, editLocalStorage } from "@/utils/LocalStorage";
+import { getStorage, editLocalStorage, saveProblem } from "@/utils/LocalStorage";
 import useProblemStore from "@/zustang/useProblemStore";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -42,8 +42,8 @@ const Problem = () => {
   };
 
   const SaveProblem=()=>{
-      const status=editLocalStorage(problems.ID,"savedProblems", true);
-      if(status) toast.success("Problem saved successfully", {
+      saveProblem(problems.ID)
+       toast.success("Problem saved successfully", {
         style: {
           borderRadius: "10px",
           background: "#333",
