@@ -10,7 +10,7 @@ import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
 import CommunityPage from "./pages/Community";
 import React_Editor from "./pages/React_Editor";
-
+import FrontendList from "./pages/FrontendList";
 function App() {
   return (
     <BrowserRouter>
@@ -27,12 +27,24 @@ function App() {
 
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
-          <Route path="/user/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard/>
-            </ProtectedRoute>
-          }
+          <Route
+            path="/user/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
           />
+
+          <Route
+            path="/frontendproblemlist"
+            element={
+              <ProtectedRoute>
+                <FrontendList />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="playground/react-editor" element={<React_Editor />} />
 
           <Route
