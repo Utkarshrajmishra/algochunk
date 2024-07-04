@@ -3,9 +3,7 @@ import { databaseRef } from "@/Firebase";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -55,27 +53,26 @@ const LikedProblemsComponent = () => {
   return (
     <>
       <div className="w-[450px] h-fit rounded-lg p-4  bg-neutral-900 min-h-[300px]">
-            <p className="text-center text-zinc-200 text-xl font-semibold">Liked Problems</p>
-            <Table className="text-zinc-200">
-              <TableHeader>
-                <TableRow className="hover:bg-zinc-800">
-                  <TableHead className="text-zinc-300 ">Problem</TableHead>
+        <p className="text-center text-zinc-200 text-xl font-semibold">
+          Liked Problems
+        </p>
+        <Table className="text-zinc-200">
+          <TableHeader>
+            <TableRow className="hover:bg-zinc-800">
+              <TableHead className="text-zinc-300 ">Problem</TableHead>
 
-                  <TableHead className="text-right text-zinc-300">
-                    Level
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-             
-              <TableBody>
-                 {problems.length == 0 ? (
-          <p>No problem to show</p>
-        ) : (
-          problems.map((prob) => (
-        
-                <TableRow className="hover:bg-zinc-800">
+              <TableHead className="text-right text-zinc-300">Level</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {problems.length == 0 ? (
+              <p>No problem to show</p>
+            ) : (
+              problems.map((prob) => (
+                <TableRow className="hover:bg-zinc-800" key={prob.id}>
                   <TableCell className="font-medium">{prob.Title}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right flex ">
                     <p
                       className={
                         prob.Level == "Medium"
@@ -83,14 +80,14 @@ const LikedProblemsComponent = () => {
                           : "p-2 bg-green-600 text-right w-fit h-fit rounded-md"
                       }
                     >
-                    {prob.Level}
+                      {prob.Level}
                     </p>
                   </TableCell>
                 </TableRow>
-          )))}
-              </TableBody>
-            </Table>
-         
+              ))
+            )}
+          </TableBody>
+        </Table>
       </div>
     </>
   );

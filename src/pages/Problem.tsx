@@ -6,10 +6,17 @@ import { useEffect, useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
 import DialogComp from "@/components/Dailog/DialogComponent";
+import {
+  IoIosCheckmarkCircleOutline,
+  IoIosCheckmarkCircle,
+} from "react-icons/io";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
-import { RiSave2Line } from "react-icons/ri";
-import { TbReload } from "react-icons/tb";
-import { getStorage, editLocalStorage, saveProblem } from "@/utils/LocalStorage";
+import { IoSaveOutline, IoSave } from "react-icons/io5"; // Imported IoSave
+import {
+  getStorage,
+  editLocalStorage,
+  saveProblem,
+} from "@/utils/LocalStorage";
 import useProblemStore from "@/zustang/useProblemStore";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -22,6 +29,8 @@ const Problem = () => {
   const [processing, setProcessing] = useState(false);
   const [code, setCode] = useState<any>();
   const [renderLikes, setRenderLikes] = useState(false);
+  const [renderSolved, setSolved] = useState(false);
+  const [isSaved, setIsSaved] = useState(false); // New state to track saved status
 
   const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
@@ -41,20 +50,36 @@ const Problem = () => {
     setRenderLikes(newStatus);
   };
 
-  const SaveProblem=()=>{
-      saveProblem(problems.ID)
-       toast.success("Problem saved successfully", {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-  }
+  const SaveProblem = () => {
+    saveProblem(problems.ID, "SavedProblem");
+    toast.success("Problem saved successfully", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+    setIsSaved(true); // Update saved status
+  };
+
+  const completeProblem = () => {
+    saveProblem(problems.ID, "CompletedProblems");
+    toast.success("Marked completed", {
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+  };
 
   useEffect(() => {
     const isLiked = getStorage(problems.ID, "Likes");
+    const completedProblem = getStorage(problems.ID, "CompletedProblems");
+    const savedProblem = getStorage(problems.ID, "SavedProblem"); // Check if the problem is saved
+    setSolved(completedProblem);
     setRenderLikes(isLiked);
+    setIsSaved(savedProblem); // Set the initial saved status
   }, [problems.ID]);
 
   const handleCodeChange = (codeType: string, code: string) => {
@@ -125,7 +150,7 @@ const Problem = () => {
         return;
       }
     } catch (err) {
-      toast.error(`Error: ${err}`)
+      toast.error(`Error: ${err}`);
       setProcessing(false);
     }
   };
@@ -154,20 +179,39 @@ const Problem = () => {
               </div>
 
               <div className="p-2 bg-neutral-800 rounded-lg">
-                <RiSave2Line
-                  onClick={SaveProblem}
-                  fontSize="1.3em"
-                  className="cursor-pointer"
-                  color="white"
-                />
+                {!isSaved ? (
+                  <IoSaveOutline
+                    onClick={SaveProblem}
+                    fontSize="1.3em"
+                    className="cursor-pointer"
+                    color="white"
+                  />
+                ) : (
+                  <IoSave
+                    onClick={SaveProblem}
+                    fontSize="1.3em"
+                    className="cursor-pointer"
+                    color="white"
+                  />
+                )}
               </div>
-              <div className="p-2 bg-neutral-800 rounded-lg">
-                <TbReload
-                  fontSize="1.3em"
-                  className="cursor-pointer"
-                  onClick={() => setCode("")}
-                  color="white"
-                />
+              <div
+                className="p-2 bg-neutral-800 rounded-lg"
+                onClick={completeProblem}
+              >
+                {renderSolved ? (
+                  <IoIosCheckmarkCircle
+                    fontSize="1.3em"
+                    className="cursor-pointer"
+                    color="white"
+                  />
+                ) : (
+                  <IoIosCheckmarkCircleOutline
+                    fontSize="1.3em"
+                    className="cursor-pointer"
+                    color="white"
+                  />
+                )}
               </div>
             </div>
           </div>

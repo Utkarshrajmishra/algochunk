@@ -27,11 +27,16 @@ export const getStorageItems=(key:string)=>{
   return JSON.parse(localStorage.getItem(key) || "[]")
 }
 
-export const saveProblem=(problemID:string)=>
+export const saveProblem=(problemID:string, key:string)=>
 {
-  const item=JSON.parse(localStorage.getItem("SavedProblem") || "[]" );
-  const set=new Set(item);
-  set.add(problemID);
-  localStorage.setItem("SavedProblems",JSON.stringify(Array.from(set)))
+  const item=JSON.parse(localStorage.getItem(key) || "[]" );
+  let set=new Set(item);
+  set.add(problemID)
+  localStorage.setItem(key,JSON.stringify(Array.from(set)))
 }
 
+
+export const ProblemLength=()=>{
+  const item = JSON.parse(localStorage.getItem("CompletedProblemcs") || "[]");
+  return item.length;
+}
