@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Timestamp } from "firebase/firestore";
-import formatPostTime from "@/utils/FormateTime";
+import FormatPostTime from "@/utils/FormateTime";
 
 interface Post {
   id: string;
@@ -8,7 +8,7 @@ interface Post {
   userName: string;
   userID: string;
   postContent: string;
-  timeStamp: Timestamp;
+  timeStamp: Timestamp | null;
 }
 
 interface PostProps {
@@ -16,9 +16,13 @@ interface PostProps {
 }
 
 const PostComp: FC<PostProps> = ({ Post }) => {
-  const time = formatPostTime(Post.timeStamp);
+  let time=""
+  if(Post.timeStamp!=null)
+   time = FormatPostTime(Post.timeStamp);
+
   const formatText = (text: string) => {
-    return text.replace(/\n/g, "<br />");
+    console.log(text.split("\\n"));
+    return text.split("\\n").map((line, index) => <p key={index}>{line}</p>);
   };
 
   return (
@@ -37,10 +41,8 @@ const PostComp: FC<PostProps> = ({ Post }) => {
           <p className="text-sm">{time}</p>
         </div>
       </div>
-      <div className="text-zinc-200 p-3 tracking-wide rounded-xl bg-neutral-900  ">
-        <div
-          dangerouslySetInnerHTML={{ __html: formatText(Post.postContent) }}
-        />
+      <div className="text-zinc-200 p-3 tracking-wide rounded-xl bg-neutral-900">
+        <div className="tracking-wider leading-8">{formatText(Post.postContent)}</div>
       </div>
     </div>
   );

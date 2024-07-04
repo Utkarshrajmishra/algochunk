@@ -3,6 +3,8 @@ import dbService from "@/firebaseService/dbService";
 import { useEffect, useState } from "react";
 import { Timestamp } from "firebase/firestore";
 import PostComp from "@/components/Post/Post";
+import { Skeleton } from "@/components/ui/skeleton";
+
 interface Post {
   id: string;
   photoUrl: string;
@@ -30,22 +32,44 @@ const CommunityPage = () => {
     };
 
     getAllPost();
-  });
+  }, []);
 
   return (
-    <>
-      <div className="max-h-[100vh] overflow-hidden bg-neutral-950 flex justify-center">
-        <section className=" w-[800px] overflow-y-auto p-4 ">
-          {allPost?.map((post) => (
-            <div className="py-2 ">
-              {" "}
-              <PostComp key={post.id} Post={post} />
+    <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center">
+      <section className="flex-1 max-w-[800px] w-full overflow-y-auto p-4">
+        {allPost ? (
+          allPost.map((post) => (
+            <div key={post.id} className="py-2">
+              <PostComp Post={post} />
             </div>
-          ))}
-        </section>
-        <CreatePost />
+          ))
+        ) : (
+          // Skeleton loading while waiting for data
+          <>
+            {[...Array(6)].map((_, index) => (
+              <div
+                key={index}
+                className="py-2 flex flex-col gap-3 outline w-full"
+              >
+                <div className="flex items-center space-x-4 gap-3">
+                  <Skeleton className="h-12 w-12 rounded-full" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[300px]" />
+                    <Skeleton className="h-4 w-[300px]" />
+                  </div>
+                </div>
+                <Skeleton className="h-7 w-full" />
+              </div>
+            ))}
+          </>
+        )}
+      </section>
+      <div className="flex-shrink-0 max-w-[800px] w-full md:w-auto p-8">
+        <div className="fixed bottom-4 right-4">
+          <CreatePost />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
