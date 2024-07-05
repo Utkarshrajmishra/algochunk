@@ -56,7 +56,7 @@ function App() {
             }
           />
 
-          <Route path="playground/react-editor" element={<CodeEditor />} />
+          <Route path="playground/code-editor" element={<CodeEditor />} />
 
           <Route
             path="problem-list"

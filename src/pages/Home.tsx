@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Home = () => {
   const topics = [
     "Arrays",
@@ -28,7 +29,7 @@ const Home = () => {
             </h1>
             <p>
               Created by the developer of{" "}
-              <span className="text-blue-500 font-semibold">Get AI News</span>
+              <Link  to={"playground/code-editor"} className="text-blue-500 font-semibold">Get AI News</Link>
             </p>
 
             <p>
@@ -43,12 +44,16 @@ const Home = () => {
               generate code and practice.
             </p>
             <section className="flex gap-3 w-full justify-center lg:justify-start">
-              <button className="p-3 text-sm bg-blue-500 text-white font-semibold rounded-lg hover:bg-white hover:outline hover:outline-[1px] hover:outline-blue-500 hover:text-zinc-800 ">
-                DSA Problems
-              </button>
-              <button className="p-3 text-sm outline-blue-500 outline outline-[1px] font-semibold rounded-lg hover:bg-blue-500 hover:text-white hover:font-semibold text-zinc-200">
-                Frontend Problems
-              </button>
+              <Link to={"problem-list"}>
+                <button className="p-3 text-sm bg-blue-500 text-white font-semibold rounded-lg hover:bg-neutral-950 hover:outline hover:outline-[1px] hover:outline-blue-500 hover:text-zinc-200 ">
+                  DSA Problems
+                </button>
+              </Link>
+              <Link to={"/frontendproblemlist"}>
+                <button className="p-3 text-sm outline-blue-500 outline outline-[1px] font-semibold rounded-lg hover:bg-blue-500 hover:text-white hover:font-semibold text-zinc-200">
+                  Frontend Problems
+                </button>
+              </Link>
             </section>
           </section>
           <section className="md:w-[50%] md:mr-[-30%] mt-2 md:mt-0 image overflow-hidden px-5 md:px-0">
@@ -112,11 +117,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="h-[100vh] bg-neutral-950">
+      {/* <section className="h-[100vh] bg-neutral-950">
         <div className="relative h-full w-full bg-neutral-950">
           <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };
