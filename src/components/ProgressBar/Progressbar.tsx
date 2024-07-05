@@ -8,7 +8,7 @@ interface ProgressbarProps {
 const Progressbar: FC<ProgressbarProps> = ({
   problemLength,
 }: ProgressbarProps) => {
-  const percentage = (problemLength / 30) * 100;
+  const percentage = Math.floor((problemLength / 30) * 100);
     console.log(problemLength)
   return (
     <>
