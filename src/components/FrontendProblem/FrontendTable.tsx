@@ -12,6 +12,7 @@ import useFrontendStore from "@/zustang/useFrontendStore";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import {  FaLongArrowAltRight } from "react-icons/fa";
+import useFrontendProblemStore from "@/zustang/useFrontendProblem";
 
 interface FrontendProblem {
   id: string;
@@ -28,9 +29,17 @@ interface TableListProps {
 const FrontendTableList: React.FC<TableListProps> = ({ problems }) => {
   const [filter, setFilter] = useState("");
   const {Frontendloading}=useFrontendStore()
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
+  const {updateProblem}=useFrontendProblemStore()
   
-  
+  const sendData=(id:string, title:string, statement:string, level:string, constraints:string)=>{
+    updateProblem("ID",id)
+    updateProblem("Title",title)
+    updateProblem("Contraints", constraints)
+    updateProblem("Level",level)
+    updateProblem("Statement",statement)
+    navigate("/frontendproblem/react-editor");
+  }
 
   return (
     <>
@@ -88,15 +97,15 @@ const FrontendTableList: React.FC<TableListProps> = ({ problems }) => {
                         </TableCell>
                          <TableCell
                           className="cursor-pointer w-[420px]"
-                        //   onClick={() =>
-                        //     updateProblemState(
-                        //       prob.id,
-                        //       prob.Title,
-                        //       prob.Statement,
-                        //       prob.Level,
-                        //       prob.Contraints
-                        //     )
-                        //   }
+                          onClick={() =>
+                            sendData(
+                              prob.id,
+                              prob.Title,
+                              prob.Statement,
+                              prob.Level,
+                              prob.Constraints
+                            )
+                          }
                         >
                           {prob.Title}
                         </TableCell>
@@ -115,17 +124,15 @@ const FrontendTableList: React.FC<TableListProps> = ({ problems }) => {
                           <FaLongArrowAltRight
                             fontSize={22}
                             color="#2563eb"
-                            // onClick={() =>
-                            //   updateProblemState(
-                            //     prob.id,
-                            //     prob.Title,
-                            //     prob.Statement,
-                            //     prob.Level,
-                            //     prob.Input,
-                            //     prob.Output,
-                            //     prob.Contraints
-                            //   )
-                            // }
+                            onClick={() =>
+                              sendData(
+                                prob.id,
+                                prob.Title,
+                                prob.Statement,
+                                prob.Level,
+                               prob.Constraints
+                              )
+                            }
                           />
                         </TableCell>
                       </TableRow>

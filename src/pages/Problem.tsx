@@ -17,6 +17,7 @@ import {
   editLocalStorage,
   saveProblem,
 } from "@/utils/LocalStorage";
+import { Link } from "react-router-dom";
 import useProblemStore from "@/zustang/useProblemStore";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -159,12 +160,16 @@ const Problem = () => {
     <>
       <div className="flex justify-between w-full px-3 py-2 bg-neutral-900">
         <div className="flex w-[400px] justify-between pr-3">
-          <img
-            src="./logo.png"
-            width={40}
-            height={40}
-            className="cursor-pointer"
-          />
+          <Link to={"/"}>
+            {" "}
+            <img
+              src="./logo.png"
+              width={40}
+              height={40}
+              className="cursor-pointer"
+            />
+          </Link>
+
           <div>
             <div className="flex h-full items-center gap-3">
               <div

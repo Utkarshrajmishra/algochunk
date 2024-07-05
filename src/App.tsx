@@ -11,6 +11,7 @@ import ProblemList from "./pages/ProblemList";
 import CommunityPage from "./pages/Community";
 import React_Editor from "./pages/React_Editor";
 import FrontendList from "./pages/FrontendList";
+import FrontendProblemPage from "./pages/FrontendProblemPage";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Problem />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/frontendproblem/react-editor"
+          element={
+            <ProtectedRoute>
+              <FrontendProblemPage />
             </ProtectedRoute>
           }
         />
