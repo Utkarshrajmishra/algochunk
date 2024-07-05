@@ -37,6 +37,6 @@ export const saveProblem=(problemID:string, key:string)=>
 
 
 export const ProblemLength=()=>{
-  const item = JSON.parse(localStorage.getItem("CompletedProblemcs") || "[]");
+  const item = JSON.parse(localStorage.getItem("CompletedProblems") || "[]");
   return item.length;
 }
