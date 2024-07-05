@@ -95,7 +95,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="playground/react-editor"
+                  to="playground/code-editor"
                   className="block text-sm py-2 px-3 md:p-0 rounded hover:bg-blue-500 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Playground

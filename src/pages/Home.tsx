@@ -12,7 +12,7 @@ const Home = () => {
             </h1>
             <p>
               Created by the developer of{" "}
-              <Link  to={"playground/code-editor"} className="text-blue-500 font-semibold">Get AI News</Link>
+              <span className="text-blue-500 font-semibold">Get AI News</span>
             </p>
 
             <p>
@@ -23,8 +23,13 @@ const Home = () => {
             </p>
             <p>
               Explore{" "}
-              <span className="text-blue-500 font-semibold">Playground</span> to
-              generate code and practice.
+              <Link
+                to={"playground/code-editor"}
+                className="text-blue-500 font-semibold"
+              >
+                Playground
+              </Link>{" "}
+              to generate code and practice.
             </p>
             <section className="flex gap-3 w-full justify-center lg:justify-start">
               <Link to={"problem-list"}>
