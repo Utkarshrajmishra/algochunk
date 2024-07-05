@@ -1,23 +1,6 @@
 import { Link } from "react-router-dom";
 const Home = () => {
-  const topics = [
-    "Arrays",
-    "Strings",
-    "Dyamic Programming",
-    "Graphs",
-    "Hashing",
-    "Trees",
-    "Sliding Window",
-    "Backtracking",
-    "useEffect",
-    "useContext",
-    "useState",
-    "React Core Concepts",
-    "Custom Hooks",
-    "Memorization",
-    "and many more",
-  ];
-
+  
   return (
     <>
       <div className="relative mx-auto h-full w-full overflow-hidden pt-12 md:pt-0 lg:pt-0">
