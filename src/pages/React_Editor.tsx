@@ -3,7 +3,7 @@ const React_Editor = () => {
   return (
     <>
       <div className="bg-neutral-950 ">
-        <div className="mt-4">
+        <div className="">
           <StackBlitzEditor width="w-[100wh]" height="h-[100vh]" />
         </div>
       </div>

@@ -65,7 +65,7 @@ const CommunityPage = () => {
         )}
       </section>
       <div className="flex-shrink-0 max-w-[800px] w-full md:w-auto p-8">
-        <div className="fixed bottom-4 right-4">
+        <div className="fixed bottom-9 right-9">
           <CreatePost />
         </div>
       </div>

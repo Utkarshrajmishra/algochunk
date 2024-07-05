@@ -80,7 +80,7 @@ const CreatePost = () => {
     <>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
-          <section className="bg-neutral-800 p-3 h-fit w-fit rounded-full">
+          <section className="bg-neutral-800 hover:bg-neutral-900  cursor-pointer p-3 h-fit w-fit rounded-full">
             <LuPenSquare color="white" fontSize={22} />
           </section>
         </DialogTrigger>
