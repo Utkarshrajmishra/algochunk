@@ -1,90 +1,30 @@
-import ProblemSwitch from "@/components/Problem/ProblemSwitch";
-import Input from "@/components/Input/Input";
 import EditorComp from "@/components/Editor/Editor";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LanguageDropDown from "@/components/dropdown/languages";
 import axios from "axios";
-import DialogComp from "@/components/Dailog/DialogComponent";
-import {
-  IoIosCheckmarkCircleOutline,
-  IoIosCheckmarkCircle,
-} from "react-icons/io";
-import { AiOutlineLike, AiFillLike } from "react-icons/ai";
-import { IoSaveOutline, IoSave } from "react-icons/io5"; // Imported IoSave
-import {
-  getStorage,
-  editLocalStorage,
-  saveProblem,
-} from "@/utils/LocalStorage";
-import { Link } from "react-router-dom";
-import useProblemStore from "@/zustang/useProblemStore";
 import toast, { Toaster } from "react-hot-toast";
 import EditorOutput from "@/components/Output/EditorOutput";
 import EditorInput from "@/components/Input/EditorInput";
 
 const CodeEditor = () => {
-  const { problems } = useProblemStore();
+ 
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [LangId, setLangId] = useState(63);
   const [language, setLanguage] = useState("");
   const [processing, setProcessing] = useState(false);
   const [code, setCode] = useState<any>();
-  const [renderLikes, setRenderLikes] = useState(false);
-  const [renderSolved, setSolved] = useState(false);
-  const [isSaved, setIsSaved] = useState(false); // New state to track saved status
-
+  
   const handleChangeLang = (newLang: any) => {
     setLangId(newLang.id);
     setLanguage(newLang.value);
   };
 
-  const handleLike = () => {
-    const status = !renderLikes;
-    const newStatus = editLocalStorage(problems.ID, "Likes", status);
-    toast.success("Like Updated!", {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-    setRenderLikes(newStatus);
-  };
-
-  const SaveProblem = () => {
-    saveProblem(problems.ID, "SavedProblem");
-    toast.success("Problem saved successfully", {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-    setIsSaved(true); // Update saved status
-  };
-
-  const completeProblem = () => {
-    saveProblem(problems.ID, "CompletedProblems");
-    toast.success("Marked completed", {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  };
-
-  useEffect(() => {
-    const isLiked = getStorage(problems.ID, "Likes");
-    const completedProblem = getStorage(problems.ID, "CompletedProblems");
-    const savedProblem = getStorage(problems.ID, "SavedProblem"); // Check if the problem is saved
-    setSolved(completedProblem);
-    setRenderLikes(isLiked);
-    setIsSaved(savedProblem); // Set the initial saved status
-  }, [problems.ID]);
-
+  
+  
+  
+  
   const handleCodeChange = (codeType: string, code: string) => {
     if (codeType === "code") setCode(code);
   };

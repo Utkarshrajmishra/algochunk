@@ -9,7 +9,6 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Problem from "./pages/Problem";
 import ProblemList from "./pages/ProblemList";
 import CommunityPage from "./pages/Community";
-import React_Editor from "./pages/React_Editor";
 import FrontendList from "./pages/FrontendList";
 import CodeEditor from "./pages/CodeEditor";
 import FrontendProblemPage from "./pages/FrontendProblemPage";
