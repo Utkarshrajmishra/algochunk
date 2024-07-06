@@ -31,7 +31,7 @@ Algochunk is a web application designed to help users practice Data Structures a
 - **Backend**:
   - [Firebase](https://firebase.google.com/)
   - [judge0](https://judge0.com/)
-  - [Google Gemini API] (https://ai.google.dev/)
+  - [Google Gemini API](https://ai.google.dev/)
 
 - **Other Tools**:
   - [StackBlitz](https://stackblitz.com/)
