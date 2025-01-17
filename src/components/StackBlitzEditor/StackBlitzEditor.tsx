@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import sdk from "@stackblitz/sdk";
 
-
-interface stackblitzProps{
- width:string,
- height: string
+interface stackblitzProps {
+  width: string;
+  height: string;
 }
 
-const StackBlitzEditor: React.FC<stackblitzProps> = ({width, height}: stackblitzProps) => {
+const StackBlitzEditor: React.FC<stackblitzProps> = ({
+  width,
+  height,
+}: stackblitzProps) => {
   useEffect(() => {
     // Embed the StackBlitz project
-    sdk.embedProjectId("editor", "stackblitz-starters-hkpxas", {
+    sdk.embedProjectId("editor", "demo-react-application-3mzwucpv", {
       forceEmbedLayout: true,
-      openFile: "src/App.tsx",
+      openFile: "src/App.js",
     });
   }, []);
 
