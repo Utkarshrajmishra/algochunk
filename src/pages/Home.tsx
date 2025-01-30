@@ -12,7 +12,11 @@ const Home = () => {
             </h1>
             <p>
               Created by the developer of{" "}
-              <span className="text-blue-500 font-semibold">Get AI News</span>
+              <a href="https://get-ai-news-chi.vercel.app/">
+                <span className="text-blue-500 font-semibold underline">
+                  Get AI News
+                </span>
+              </a>
             </p>
 
             <p>

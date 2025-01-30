@@ -20,7 +20,7 @@ const Navbar = () => {
           >
             <img src="./logo.png" className="h-8" alt="AlgoChunk Logo" />
             <span className="self-center text-zinc-200 text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Algochunk
+              Get AI News
             </span>
           </NavLink>
 
